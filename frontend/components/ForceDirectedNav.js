@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import D3Component from './D3Component';
 
 let vis;
-
-export default function ForceDirectedNav() {
+// https://medium.com/@stopyransky/react-hooks-and-d3-39be1d900fb
+export default function ForceDirectedNav(props) {
     const [data, setData] = useState(null);
     const [width, setWidth] = useState(600);
     const [height, setHeight] = useState(600);
@@ -16,7 +16,8 @@ export default function ForceDirectedNav() {
     useEffect(updateVisOnResize, [width, height]);
 
     function fetchData() {
-        Promise.resolve().then(() => setData(['a', 'b', 'c']));
+        Promise.resolve().then(() => setData(props.data));
+
     }
 
     function handleResizeEvent() {
@@ -36,13 +37,15 @@ export default function ForceDirectedNav() {
     }
 
     function initVis() {
-        if (data && data.length) {
+
+        if (data) {
             const d3Props = {
                 data,
                 width,
                 height,
                 onDatapointClick: setActive
             };
+            console.log("vis initi")
             vis = new D3Component(refElement.current, d3Props);
         }
     }
