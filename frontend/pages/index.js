@@ -25,7 +25,7 @@ const Home = ({ articles, categories, homepage }) => {
       </Head>
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
-        <ForceDirectedNav data={graphData} />
+        <ForceDirectedNav data={graphData} height={500} />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>{homepage.hero.title}</h1>

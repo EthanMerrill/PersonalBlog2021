@@ -5,13 +5,12 @@ let vis;
 // https://medium.com/@stopyransky/react-hooks-and-d3-39be1d900fb
 export default function ForceDirectedNav(props) {
     const [data, setData] = useState(null);
-    const [width, setWidth] = useState(600);
-    const [height, setHeight] = useState(600);
+    const [width, setWidth] = useState(null);
+    const [height, setHeight] = useState(null);
     const [active, setActive] = useState(null);
     const refElement = useRef(null);
-
     useEffect(fetchData, []);
-    useEffect(handleResizeEvent, []);
+    // useEffect(handleResizeEvent, []);
     useEffect(initVis, [data]);
     useEffect(updateVisOnResize, [width, height]);
 
@@ -22,11 +21,13 @@ export default function ForceDirectedNav(props) {
 
     function handleResizeEvent() {
         let resizeTimer;
+        console.log("handle resize event called")
         const handleResize = () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function () {
                 setWidth(window.innerWidth);
                 setHeight(window.innerHeight);
+                console.log(width, height)
             }, 300);
         };
         window.addEventListener('resize', handleResize);
@@ -43,9 +44,8 @@ export default function ForceDirectedNav(props) {
                 data,
                 width,
                 height,
-                onDatapointClick: setActive
-            };
-            console.log("vis initi")
+        };
+            // console.log(d3Props.width, d3Props.height)
             vis = new D3Component(refElement.current, d3Props);
         }
     }
@@ -55,9 +55,9 @@ export default function ForceDirectedNav(props) {
     }
 
     return (
-        <div className='react-world'>
+        <div id='react-world' className='react-world'>
             <div>{active}</div>
-            <div ref={refElement} />
+            <div id="d3-div" className=" d3-div" ref={refElement} />
         </div>
     );
 }

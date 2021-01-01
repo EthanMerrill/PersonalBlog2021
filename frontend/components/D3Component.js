@@ -2,62 +2,6 @@
 import * as d3 from 'd3';
 
 
-const drag = simulation => {
-
-    function dragstarted(event) {
-        if (!event.active) simulation.alphaTarget(.3).restart();
-        event.subject.fx = event.subject.x;
-        event.subject.fy = event.subject.y;
-    }
-
-    function dragged(event) {
-        event.subject.fx = event.x;
-        event.subject.fy = event.y;
-    }
-
-    function dragended(event) {
-        if (!event.active) simulation.alphaTarget(0);
-        event.subject.fx = null;
-        event.subject.fy = null;
-    }
-
-    return d3.drag()
-        .on("start", dragstarted)
-        .on("drag", dragged)
-        .on("end", dragended);
-}
-
-
-const color = d3.scaleOrdinal([" #4f5d75", "#FFBA08", "green", "orange"])
-
-const radius = d3.scaleOrdinal([50, 25, 20, 8])
-
-
-const border = (group) => {
-    if (group == 'page') {
-        return 'red'
-    }
-    return "blue"
-}
-
-const mouseOver = function (d) {
-    // console.log(this.getAttribute('r'))
-    // Use D3 to select element, change color and size
-    d3.select(this).attr(
-        "r", (this.getAttribute('r') * 1.1)
-    );
-}
-
-const mouseLeave = function (d) {
-    // console.log(this.getAttribute('r'))
-    // Use D3 to select element, change color and size
-    d3.select(this).attr(
-        "r", (this.getAttribute('r') * .9)
-    );
-}
-
-
-
 class D3Component {
 
     containerEl;
@@ -73,45 +17,40 @@ class D3Component {
             .style('background-color', 'white')
             .attr('width', width)
             .attr('height', height);
-        this.updateDatapoints();
+        // this.updateDatapoints();
         this.buildNetwork(props.data, containerEl, this.svg, width, height);
     }
 
-    updateDatapoints = () => {
-        const { svg, props: { data, width, height } } = this;
-        svg.selectAll('circle')
-            .data(data)
-            .enter()
-            .append('circle')
-            .style('fill', 'red')
-            .attr('cx', () => Math.random() * width)
-            .attr('cy', () => Math.random() * height)
-            .attr('r', 10)
-            .on('mouseup', (d, i, nodes) => this.setActiveDatapoint(d, nodes[i]));
-    }
+    // updateDatapoints = () => {
+    //     const { svg, props: { data, width, height } } = this;
+    //     svg.selectAll('circle')
+    //         .data(data)
+    //         .enter()
+    //         .append('circle')
+    //         .style('fill', 'red')
+    //         .attr('cx', () => Math.random() * width)
+    //         .attr('cy', () => Math.random() * height)
+    //         .attr('r', 10)
+    //         .on('mouseup', (d, i, nodes) => this.setActiveDatapoint(d, nodes[i]));
+    // }
 
-    setActiveDatapoint = (d, node) => {
-        d3.select(node).style('fill', 'yellow');
-        this.props.onDatapointClick(d);
-    }
+    // setActiveDatapoint = (d, node) => {
+    //     d3.select(node).style('fill', 'yellow');
+    //     this.props.onDatapointClick(d);
+    // }
 
     resize = (width, height) => {
+        console.log("resize")
         const { svg } = this;
-        svg.attr('width', width)
-            .attr('height', height);
-        svg.selectAll('circle')
-            .attr('cx', () => Math.random() * width)
-            .attr('cy', () => Math.random() * height);
+
+        this.buildNetwork.resize(width, height);
     }
-
-
-
-
-
 
 
     buildNetwork = (data, chartRef, svg, width, height) => {
-        console.log(data, chartRef)
+        console.log(chartRef)
+
+        // console.log(height, width)
         function linkFinder(data) {
             let node_links = []
             nodes.forEach(function linkMaker(nodes) {
@@ -133,7 +72,7 @@ class D3Component {
                                 onelink.value = 20;
                             }
                         }
-                        console.log(onelink.source)
+                        // console.log(onelink.source)
                         node_links.push(onelink)
                     })
 
@@ -278,11 +217,14 @@ class D3Component {
         });
 
         width, height = resize();
-        d3.select(window).on("resize", resize);
+        d3.select(window).on("resize", resize());
 
 
         function resize() {
-            width = window.innerWidth, height = window.innerHeight;
+            //get the element containing the d3 and use client height and width attributes to get the size of this element and set the size of the svg as the same size
+            let parentElement = document.getElementById('d3-div')
+            console.log(parentElement)
+            width = parentElement.clientWidth, height = parentElement.clientHeight;
             svg.attr("width", width).attr("height", height);
             // console.log(width, height)
             simulation.force("center", d3.forceCenter(width / 2, height / 2)).restart();
@@ -294,5 +236,65 @@ class D3Component {
 
 
 }
+
+//Force Directed Graph Helper functions
+const drag = simulation => {
+
+    function dragstarted(event) {
+        if (!event.active) simulation.alphaTarget(.3).restart();
+        event.subject.fx = event.subject.x;
+        event.subject.fy = event.subject.y;
+    }
+
+    function dragged(event) {
+        event.subject.fx = event.x;
+        event.subject.fy = event.y;
+    }
+
+    function dragended(event) {
+        if (!event.active) simulation.alphaTarget(0);
+        event.subject.fx = null;
+        event.subject.fy = null;
+    }
+
+    return d3.drag()
+        .on("start", dragstarted)
+        .on("drag", dragged)
+        .on("end", dragended);
+}
+
+
+const color = d3.scaleOrdinal([" #4f5d75", "#FFBA08", "green", "orange"])
+
+const radius = d3.scaleOrdinal([50, 25, 20, 8])
+
+
+const border = (group) => {
+    if (group == 'page') {
+        return 'red'
+    }
+    return "blue"
+}
+
+const mouseOver = function (d) {
+    // console.log(this.getAttribute('r'))
+    // Use D3 to select element, change color and size
+    d3.select(this).attr(
+        "r", (this.getAttribute('r') * 1.1)
+    );
+}
+
+const mouseLeave = function (d) {
+    // console.log(this.getAttribute('r'))
+    // Use D3 to select element, change color and size
+    d3.select(this).attr(
+        "r", (this.getAttribute('r') * .9)
+    );
+}
+
+
+
+
+
 
 export default D3Component;
