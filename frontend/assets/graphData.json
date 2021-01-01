@@ -1,0 +1,89 @@
+{
+    "nodes": [{
+            "id": "Ethan Merrill",
+            "url": "#",
+            "group": "Ethan",
+            "links": [{ "source": "Ethan Merrill", "target": "Marine", "value": 20 },
+                { "source": "Ethan Merrill", "target": "Mechanical Design", "value": 20 },
+                { "source": "Ethan Merrill", "target": "Coding", "value": 20 },
+                { "source": "Ethan Merrill", "target": "Alternative Energy", "value": 20 },
+                { "source": "Ethan Merrill", "target": "Entrepeneurship", "value": 20 },
+                { "source": "Ethan Merrill", "target": "Business & Finance", "value": 20 }
+            ]
+        },
+        {
+            "id": "Marine",
+            "url": "https://hello.com",
+            "group": "category",
+            "icon": "fas fa-water"
+
+        },
+        { "id": "Mechanical Design", "url": "https://hello.com", "group": "category", "icon": "fas fa-cogs" },
+        { "id": "Coding", "url": "https://hello.com", "group": "category", "icon": "fas fa-code" },
+        { "id": "Alternative Energy", "url": "https://hello.com", "group": "category", "icon": "fas fa-solar-panel" },
+        { "id": "Entrepeneurship", "url": "https://hello.com", "group": "category", "icon": "fas fa-lightbulb" },
+        { "id": "Business & Finance", "url": "none", "group": "category", "icon": "fas fa-briefcase" },
+
+        {
+            "id": "Github",
+            "group": "subcategory",
+            "icon": "fab fa-github",
+            "links": [{ "source": "Github", "target": "Coding", "value": 14 }]
+        },
+        {
+            "id": "Data Visualization",
+            "group": "subcategory",
+            "icon": "fas fa-chart-bar",
+            "links": [{ "source": "Data Visualization", "target": "Coding", "value": 14 }]
+        },
+
+        {
+            "id": "Print Lab Project",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Coding" }]
+        },
+        {
+            "id": "Free Code Camp",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Coding" }]
+        },
+        {
+            "id": "Sailbot",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Marine" },
+                { "target": "Mechanical Design" }
+            ]
+        },
+
+        {
+            "id": "CS4100x: Data Visualization",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Data Visualization" }]
+        },
+        {
+            "id": "Growbox",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Entrepeneurship" }, { "target": "Business & Finance" }]
+        },
+        {
+            "id": "Wind Turbine",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Mechanical Design" }, { "target": "Alternative Energy" }]
+        },
+        {
+            "id": "Trading Algorithm",
+            "url": "https://hello.com",
+            "group": "page",
+            "links": [{ "target": "Business & Finance" },
+                { "target": "Coding" }
+            ]
+
+        }
+    ]
+}
