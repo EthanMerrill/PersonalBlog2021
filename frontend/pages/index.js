@@ -6,12 +6,22 @@ import Seo from "../components/seo";
 import ForceDirectedNav from "../components/ForceDirectedNav";
 import { fetchAPI } from "../lib/api";
 import graphData from "../assets/graphData"
+// import { ApolloProvider } from "react-apollo";
+// import { ApolloProvider } from '@apollo/client';
+import client from "../lib/apolloClient"
+// import { ApolloLink } from "@apollo/client";
+// import Query from "../components/query"
+// import NAVQUERY from "../queries/structure"
 
 
 const Home = ({ articles, categories, homepage }) => {
 
   return (
     <div>
+
+      {/* <ApolloProvider client={client}> */}
+      {/* <Query query={NAVQUERY}></Query> */}
+      {/* </ApolloProvider> */}
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
 
@@ -33,6 +43,7 @@ const Home = ({ articles, categories, homepage }) => {
         </div>
       </div>
     </Layout>
+
     </div >
   );
 };
