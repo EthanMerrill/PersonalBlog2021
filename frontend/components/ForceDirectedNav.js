@@ -18,8 +18,8 @@ export default function ForceDirectedNav(props) {
         Promise.resolve(props.data).then((data1) => {
             let tempData = Object.values(data1.data.articles).map(d => {
                 let tempArr = d.articles.map(f => { return { "source": d.title, "target": f.title } })
-
-                return ({ "id": d.title, "url": "#", "group": d.category.name, "icon": d.icon, "links": tempArr })
+                console.log(d.ExtLink)
+                return ({ "id": d.title, "url": d.ExtLink, "group": d.category.name, "icon": d.icon, "links": tempArr })
             })
             setData({ "nodes": [...tempData] })
         })

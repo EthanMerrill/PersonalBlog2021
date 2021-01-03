@@ -24,6 +24,7 @@ const Home = ({ articles, categories, homepage }) => {
                 title
                 id
                 icon
+                ExtLink
                 category{
                   name
                 }
