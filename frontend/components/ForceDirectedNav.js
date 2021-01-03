@@ -14,9 +14,16 @@ export default function ForceDirectedNav(props) {
     useEffect(initVis, [data]);
     useEffect(updateVisOnResize, [width, height]);
 
-    function fetchData() {
-        Promise.resolve().then(() => setData(props.data));
-
+    async function fetchData() {
+        Promise.resolve(props.data).then((data1) => {
+            let tempData = Object.values(data1.data.articles).map(d => {
+                let tempArr = d.articles.map(f => { return { "source": d.title, "target": f.title } })
+                // let tempArt = { "source": d.title, "target": d.title}
+                return ({ "id": d.title, "url": "#", "group": d.__typename, "links": tempArr })
+            })
+            setData({ "nodes": [...tempData] })
+        })
+            
     }
 
     function handleResizeEvent() {

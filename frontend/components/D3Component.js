@@ -48,45 +48,51 @@ class D3Component {
 
 
     buildNetwork = (data, chartRef, svg, width, height) => {
-        console.log(chartRef)
 
-        // console.log(height, width)
         function linkFinder(data) {
             let node_links = []
-            nodes.forEach(function linkMaker(nodes) {
-                // console.log(nodes.id)
+            
 
-                if (typeof nodes.links !== 'undefined') {
+            data.nodes.forEach(nodes => {
+                // console.log(typeof (nodes), nodes, nodes.links.target)
+                if ((nodes.links) != []) {
                     // node_links.push(nodes.links)
                     // console.log(nodes.links[0].source)
-                    nodes.links.forEach(function linkchecker(onelink) {
-                        if (typeof onelink.source == 'undefined') {
-                            onelink.source = nodes.id
-                        }
-                        if (typeof onelink.value == 'undefined') {
-                            if (nodes.group == 'page') {
-                                onelink.value = 10;
-                            } else if (nodes.group == 'subcategory') {
-                                onelink.value = 14;
-                            } else {
-                                onelink.value = 20;
-                            }
-                        }
+                    nodes.links.forEach(dataLink => {
+
+                        console.log(dataLink)
+                        let onelink = { "source": null, "target": null, "value": 20 }
+                        onelink.source = dataLink.source
+                        onelink.target = dataLink.target
+                        // if (typeof onelink.value == 'undefined') {
+                        //     if (nodes.group == 'page') {
+                        //         onelink.value = 10;
+                        //     } else if (nodes.group == 'subcategory') {
+                        //         onelink.value = 14;
+                        //     } else {
+                        //         onelink.value = 20;
+                        //     }
+                        // }
                         // console.log(onelink.source)
                         node_links.push(onelink)
+
                     })
 
                 }
             })
             // console.log(node_links)
-
+            console.log(node_links)
             return node_links
         }
+        //object create here is essentially a translation layer to the d3 I wrote for a previous project. This makes the data structure match what the script expects to see.
+        // console.log(data)
 
 
-        const nodes = data.nodes.map(d => Object.create(d));
 
-        const links = linkFinder().map(d => Object.create(d))
+        const nodes = data.nodes
+        console.log(...nodes)
+        const links = linkFinder(data)
+        console.log(links)
 
         const labelsNodes = data.nodes.map(d => Object.create(d));
 
@@ -108,9 +114,7 @@ class D3Component {
         var repelForce = d3.forceManyBody().strength(-250).distanceMax(800).distanceMin(1);
 
         const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(linkFinder()).id(d => d.id).distance(function (d) {
-                return (d.value) ** 1.9;
-            }).strength(0.4))
+            .force("link", d3.forceLink(links).id(d => d.id).strength(0.4))
             .force("charge", d3.forceManyBody())
             .force("attractForce", attractForce)
             .force("repelForce", repelForce)

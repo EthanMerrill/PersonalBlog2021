@@ -5,16 +5,34 @@ import Layout from "../components/layout";
 import Seo from "../components/seo";
 import ForceDirectedNav from "../components/ForceDirectedNav";
 import { fetchAPI } from "../lib/api";
-import graphData from "../assets/graphData"
+// import graphData from "../assets/graphData"
 // import { ApolloProvider } from "react-apollo";
 // import { ApolloProvider } from '@apollo/client';
-import client from "../lib/apolloClient"
+import ApolloClientInterface from "../lib/apolloClient"
+import ApolloClient from "apollo-client";
 // import { ApolloLink } from "@apollo/client";
 // import Query from "../components/query"
 // import NAVQUERY from "../queries/structure"
 
 
 const Home = ({ articles, categories, homepage }) => {
+
+  const APCI = new ApolloClientInterface("http://localhost:1337/graphql")
+  let graphData = APCI.query(`
+          query{
+              articles{
+                    title
+                id
+                category{
+                  name
+                }
+                articles {
+                  title
+                }
+              }
+            }`).then(result => { return result })
+
+
 
   return (
     <div>
@@ -35,7 +53,7 @@ const Home = ({ articles, categories, homepage }) => {
       </Head>
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
-        <ForceDirectedNav data={graphData} height={500} />
+        <ForceDirectedNav data={graphData} />
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>{homepage.hero.title}</h1>
