@@ -16,6 +16,12 @@ const Article = ({ article, categories }) => {
     article: true,
   };
 
+  if (article.author) {
+    console.log("Author  found")
+  } else {
+    console.log("author not found")
+  }
+
   return (
     <Layout categories={categories}>
       <Seo seo={seo} />
@@ -33,7 +39,7 @@ const Article = ({ article, categories }) => {
           <ReactMarkdown source={article.content} escapeHtml={false} />
           <hr className="uk-divider-small" />
           <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
-            <div>
+            {/* <div>
               {article.author.picture && (
                 <Image
                   image={article.author.picture}
@@ -44,10 +50,10 @@ const Article = ({ article, categories }) => {
                   }}
                 />
               )}
-            </div>
+            </div> */}
             <div className="uk-width-expand">
               <p className="uk-margin-remove-bottom">
-                By {article.author.name}
+                {/* By {article.author.name} */}
               </p>
               <p className="uk-text-meta uk-margin-remove-top">
                 <Moment format="MMM Do YYYY">{article.published_at}</Moment>

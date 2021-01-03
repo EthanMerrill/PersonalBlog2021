@@ -21,8 +21,9 @@ const Home = ({ articles, categories, homepage }) => {
   let graphData = APCI.query(`
           query{
               articles{
-                    title
+                title
                 id
+                icon
                 category{
                   name
                 }

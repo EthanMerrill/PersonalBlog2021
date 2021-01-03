@@ -21,7 +21,7 @@
     },
     "content": {
       "type": "richtext",
-      "required": true
+      "required": false
     },
     "publishedAt": {
       "type": "datetime",
@@ -54,19 +54,20 @@
         "videos"
       ],
       "plugin": "upload",
-      "required": true
+      "required": false
     },
     "author": {
       "model": "writer",
       "via": "articles"
     },
-    "articles": {
-      "collection": "article",
-      "via": "article"
+    "icon": {
+      "type": "string"
     },
-    "article": {
-      "model": "article",
-      "via": "articles"
+    "ExtLink": {
+      "type": "string"
+    },
+    "articles": {
+      "collection": "article"
     }
   }
 }

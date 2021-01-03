@@ -1,8 +1,16 @@
 import { getStrapiMedia } from "../lib/media";
 
 const Image = ({ image, style }) => {
-  const imageUrl = getStrapiMedia(image);
 
+  try {
+    const imageUrl = getStrapiMedia(image);
+    if (imageUrl = false) {
+      console.log("image not found")
+    }
+    
+  } catch {
+    return (<div className="image-not-found"></div>)
+  }
   return (
     <img
       src={imageUrl}

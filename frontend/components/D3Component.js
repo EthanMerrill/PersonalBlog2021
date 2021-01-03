@@ -59,8 +59,6 @@ class D3Component {
                     // node_links.push(nodes.links)
                     // console.log(nodes.links[0].source)
                     nodes.links.forEach(dataLink => {
-
-                        console.log(dataLink)
                         let onelink = { "source": null, "target": null, "value": 20 }
                         onelink.source = dataLink.source
                         onelink.target = dataLink.target
@@ -73,15 +71,13 @@ class D3Component {
                         //         onelink.value = 20;
                         //     }
                         // }
-                        // console.log(onelink.source)
+
                         node_links.push(onelink)
 
                     })
 
                 }
             })
-            // console.log(node_links)
-            console.log(node_links)
             return node_links
         }
         //object create here is essentially a translation layer to the d3 I wrote for a previous project. This makes the data structure match what the script expects to see.
@@ -90,16 +86,12 @@ class D3Component {
 
 
         const nodes = data.nodes
-        console.log(...nodes)
+
         const links = linkFinder(data)
-        console.log(links)
+
 
         const labelsNodes = data.nodes.map(d => Object.create(d));
 
-
-        // console.log(data.links.map(d => Object.create(d)))
-        // console.log(links2().map(d => Object.create(d)))
-        // console.log(links)
 
 
 
@@ -114,7 +106,7 @@ class D3Component {
         var repelForce = d3.forceManyBody().strength(-250).distanceMax(800).distanceMin(1);
 
         const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(d => d.id).strength(0.4))
+            .force("link", d3.forceLink(links).id(d => d.id).strength(0.1))
             .force("charge", d3.forceManyBody())
             .force("attractForce", attractForce)
             .force("repelForce", repelForce)
@@ -159,28 +151,10 @@ class D3Component {
             .attr('x', 0)
             .attr('y', (d => radius(d.group) + 21))
 
-        // const circleOrIcon = hyperlink.append('text')
-        //     .attr("class", function(d) {
-        //         console.log(d.icons)
-        //         if (typeof(d.icon) !== "undefined") {
-        //             return icon(d)
-        //         } else {
-        //             return circle(d)
-        //         }
-        //     })
-
-        // const icon = node.append('text')
-        //     .attr('font-family', 'FontAwesome')
-        //     // .attr("class", "fab fa-accessible-icon")
-        //     .attr("text-anchor", "middle")
-        //     .attr('alignment-baseline', "middle")
-        //     .attr('font-size', 25)
-        //     .text(function(d) {
-        //         return '\uf159'
-        //     });
         const circles = hyperlink.append("circle")
             .filter(function (d) {
-                return ((d.group == "page") || (d.group == "Ethan"))
+                console.log(d)
+                return ((d.group == "Post") || (d.group == "Bio"))
             })
             .attr("class", "circle")
             .attr("stroke", d => border(d.group))
@@ -227,7 +201,7 @@ class D3Component {
         function resize() {
             //get the element containing the d3 and use client height and width attributes to get the size of this element and set the size of the svg as the same size
             let parentElement = document.getElementById('d3-div')
-            console.log(parentElement)
+            // console.log(parentElement)
             width = parentElement.clientWidth, height = parentElement.clientHeight;
             svg.attr("width", width).attr("height", height);
             // console.log(width, height)

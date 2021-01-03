@@ -41,3 +41,7 @@ query{
   }
 }
 ```
+
+TODO:
+
+- [ ] write error handling for newly option fields such as author, image: PersonalBlog2021\frontend\pages\article\[slug].js
