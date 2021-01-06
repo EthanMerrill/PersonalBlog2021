@@ -1,8 +1,9 @@
 import Nav from "./nav";
-
+import ForceDirectedNav from "../components/ForceDirectedNav";
 const Layout = ({ children, categories, seo }) => (
   <>
-    <Nav categories={categories} />
+    {/* <Nav categories={categories} /> */}
+    <ForceDirectedNav />
     {children}
   </>
 );

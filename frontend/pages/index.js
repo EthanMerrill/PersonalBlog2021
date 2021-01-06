@@ -3,36 +3,18 @@ import Head from 'next/head'
 import Articles from "../components/articles";
 import Layout from "../components/layout";
 import Seo from "../components/seo";
-import ForceDirectedNav from "../components/ForceDirectedNav";
+
 import { fetchAPI } from "../lib/api";
 // import graphData from "../assets/graphData"
 // import { ApolloProvider } from "react-apollo";
 // import { ApolloProvider } from '@apollo/client';
-import ApolloClientInterface from "../lib/apolloClient"
-import ApolloClient from "apollo-client";
+
 // import { ApolloLink } from "@apollo/client";
 // import Query from "../components/query"
 // import NAVQUERY from "../queries/structure"
 
 
 const Home = ({ articles, categories, homepage }) => {
-
-  const APCI = new ApolloClientInterface("http://localhost:1337/graphql")
-  let graphData = APCI.query(`
-          query{
-              articles{
-                title
-                id
-                icon
-                ExtLink
-                category{
-                  name
-                }
-                articles {
-                  title
-                }
-              }
-            }`).then(result => { return result })
 
 
 
@@ -53,16 +35,16 @@ const Home = ({ articles, categories, homepage }) => {
         <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" ></link>
       </Head>
-    <Layout categories={categories}>
+      <Layout categories={categories} > 
       <Seo seo={homepage.seo} />
-        <ForceDirectedNav data={graphData} />
+
       <div className="uk-section">
-        <div className="uk-container uk-container-large">
+          <div className="uk-navbar-container uk-navbar">
           <h1>{homepage.hero.title}</h1>
           <Articles articles={articles} />
         </div>
       </div>
-    </Layout>
+      </Layout>
 
     </div >
   );

@@ -39,12 +39,7 @@ class D3Component {
     //     this.props.onDatapointClick(d);
     // }
 
-    resize = (width, height) => {
-        console.log("resize")
-        const { svg } = this;
 
-        this.buildNetwork.resize(width, height);
-    }
 
 
     buildNetwork = (data, chartRef, svg, width, height) => {
@@ -86,7 +81,6 @@ class D3Component {
 
 
         const nodes = data.nodes
-
         const links = linkFinder(data)
 
 
@@ -103,10 +97,10 @@ class D3Component {
         // height = +svg.attr("height");
 
         var attractForce = d3.forceManyBody().strength(1).distanceMax(200).distanceMin(10);
-        var repelForce = d3.forceManyBody().strength(-250).distanceMax(800).distanceMin(1);
+        var repelForce = d3.forceManyBody().strength(-350).distanceMax(800).distanceMin(1);
 
         const simulation = d3.forceSimulation(nodes)
-            .force("link", d3.forceLink(links).id(d => d.id).strength(0.1))
+            .force("link", d3.forceLink(links).id(d => d.id).strength(0.09))
             .force("charge", d3.forceManyBody())
             .force("attractForce", attractForce)
             .force("repelForce", repelForce)
@@ -139,7 +133,26 @@ class D3Component {
                 return ("xlink:href", d.url)
             })
             .attr('class', "hyperlink")
-
+            .on("mouseover", function (d, i) {
+                console.log(i.description)
+                return tooltip.style("visibility", "visible").text(i.description)
+            })
+            .on("mousemove", function (d, i) {
+                // console.log(d.clientX, d.clientY, d.screenX, d.screenY, d)
+                return tooltip.style("top", (d.clientY - 10) + "px").style("left", (d.clientX + 50) + "px");
+            })
+            .on("mouseleave", function (d, i) {
+                return tooltip.style("visibility", "hidden")
+            }
+            )
+        var tooltip = d3.select(chartRef)
+            .append("div")
+            .style("position", "absolute")
+            .style("visibility", "hidden")
+            // .attr("class", "tooltip card")
+            .attr("id", "tooltip")
+            // .text("I'm a circle!");
+            
 
         const text = hyperlink.append('text')
             .text(function (d) {
@@ -153,7 +166,7 @@ class D3Component {
 
         const circles = hyperlink.append("circle")
             .filter(function (d) {
-                console.log(d)
+                // console.log(d)
                 return ((d.group == "Post") || (d.group == "Bio"))
             })
             .attr("class", "circle")
@@ -163,8 +176,7 @@ class D3Component {
             .attr("fill", d => color(d.group))
             // .attr("fill", "red")
             .attr("opacity", .5)
-            .on("mouseover", mouseOver)
-            .on("mouseleave", mouseLeave)
+
 
 
 
@@ -197,7 +209,6 @@ class D3Component {
         width, height = resize();
         d3.select(window).on("resize", resize());
 
-
         function resize() {
             //get the element containing the d3 and use client height and width attributes to get the size of this element and set the size of the svg as the same size
             let parentElement = document.getElementById('d3-div')
@@ -214,6 +225,8 @@ class D3Component {
 
 
 }
+
+
 
 //Force Directed Graph Helper functions
 const drag = simulation => {
@@ -254,20 +267,15 @@ const border = (group) => {
     return "blue"
 }
 
-const mouseOver = function (d) {
-    // console.log(this.getAttribute('r'))
-    // Use D3 to select element, change color and size
-    d3.select(this).attr(
-        "r", (this.getAttribute('r') * 1.1)
-    );
-}
+
 
 const mouseLeave = function (d) {
     // console.log(this.getAttribute('r'))
     // Use D3 to select element, change color and size
-    d3.select(this).attr(
-        "r", (this.getAttribute('r') * .9)
-    );
+    // d3.select(this).attr(
+    //     "r", (this.getAttribute('r') * .1)
+    // )
+    d3.select("text.tooltip").remove('tooltip')
 }
 
 

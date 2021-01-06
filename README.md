@@ -44,4 +44,10 @@ query{
 
 TODO:
 
-- [ ] write error handling for newly option fields such as author, image: PersonalBlog2021\frontend\pages\article\[slug].js
+
+
+- [ ] Working post pages.
+    - [ ] write error handling for newly optional fields such as author, image PersonalBlog2021\frontend\pages\article\[slug].js
+- [ ] Routing in the force directed nav.
+- [x] force directed graph tooltips with a description of the article 
+- [ ] setup free serverless hosting on AWS or gcloud depending on which is more free
