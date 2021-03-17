@@ -43,7 +43,7 @@ class D3Component {
 
 
     buildNetwork = (data, chartRef, svg, width, height) => {
-
+        console.log(data)
         function linkFinder(data) {
             let node_links = []
             
@@ -130,15 +130,20 @@ class D3Component {
             //     return d.id;
             // })
             .attr("xlink:href", function (d) {
-                return ("xlink:href", d.url)
+                console.log(d.group, d.url, d.slug)
+                if (d.url != null){
+                    return ("xlink:href", d.url)
+                } else if (d.group != null && d.slug != null && d.slug != undefined){
+                    return ("xlink:href", ("/article").concat("/", d.slug))
+                }
+                
             })
             .attr('class', "hyperlink")
             .on("mouseover", function (d, i) {
-                console.log(i.description)
                 return tooltip.style("visibility", "visible").text(i.description)
             })
             .on("mousemove", function (d, i) {
-                // console.log(d.clientX, d.clientY, d.screenX, d.screenY, d)
+                
                 return tooltip.style("top", (d.clientY - 10) + "px").style("left", (d.clientX + 50) + "px");
             })
             .on("mouseleave", function (d, i) {

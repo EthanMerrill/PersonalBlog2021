@@ -16,6 +16,8 @@ export default function ForceDirectedNav(props) {
                   icon
                   ExtLink
                   description
+                  slug
+                  status
                   category{
                     name
                   }
@@ -42,9 +44,11 @@ export default function ForceDirectedNav(props) {
         Promise.resolve(graphData).then((data1) => {
             let tempData = Object.values(data1.data.articles).map(d => {
                 let tempArr = d.articles.map(f => { return { "source": d.title, "target": f.title } })
-                return ({ "id": d.title, "url": d.ExtLink, "group": d.category.name, "icon": d.icon, "description": d.description, "links": tempArr })
+                    return ({ "id": d.title, "url": d.ExtLink, "group": d.category.name, "icon": d.icon, "description": d.description, "links": tempArr , "slug":d.slug, "status":d.status})
             })
-            setData({ "nodes": [...tempData] })
+            // console.log(...tempData)
+            var publishedArticles = tempData.filter(node => node.status == "published")
+            setData({ "nodes": [...publishedArticles] })
         })
             
     }
