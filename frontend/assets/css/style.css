@@ -22,6 +22,7 @@ h1 {
 #banner {
   margin: 20px;
   height: 800px;
+  padding: 20px;
 }
 
 #editor {
@@ -40,21 +41,43 @@ img:hover {
   transition: opacity 0.25s cubic-bezier(0.39, 0.575, 0.565, 1);
 }
 
+.article-wrapper {
+  position:sticky;
+  z-index: 100;
+  
+ 
+}
+
+.centering-container{
+  width:90%;
+  position:relative;
+  margin: auto;
+  background-color: orange;  
+  border-radius: 3px;
+  padding: 5px;
+}
+
+
+
+/* D3 Nav Section */
+
 .d3-div{
   height:800px;
   transition: height 2s;
-
+  background-color: #f4f4f4;
 }
 
 
 .d3-div:hover{
-  height:900px
+  height:900px;
+  
 }
 
 .react-world{
   height:300px;
   filter:blur(5px);
   transition: height 2s, filter 2.5s;
+ 
 }
 
 .react-world:hover{
