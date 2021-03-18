@@ -45,10 +45,10 @@ img:hover {
   position:sticky;
   z-index: 100;
   
- 
 }
 
 .centering-container{
+  /* top:90vh; */
   width:90%;
   position:relative;
   margin: auto;
@@ -57,6 +57,11 @@ img:hover {
   padding: 5px;
 }
 
+.top-offset-block{
+  /* Made this block to go behind the d3 chart to allow for interactivity while also moving the article to the bottom of the initial viewport */
+  height:80vh;
+
+}
 
 
 /* D3 Nav Section */
@@ -64,26 +69,28 @@ img:hover {
 .d3-div{
   height:800px;
   transition: height 2s;
+  /* width:100%; */
   background-color: #f4f4f4;
 }
 
-
+/* 
 .d3-div:hover{
   height:900px;
   
-}
+} */
 
 .react-world{
-  height:300px;
-  filter:blur(5px);
-  transition: height 2s, filter 2.5s;
- 
+  height:900px;
+  position:fixed;
+  /* filter:blur(5px); */
+  width:100%;
+  transition: height 2s, filter 1.5s;
 }
 
-.react-world:hover{
-  filter:blur(0px);
-  height:900px;
+.blur {
+  filter:blur(5px);
 }
+
 
 @keyframes mymove {
   from {top: 0px;}

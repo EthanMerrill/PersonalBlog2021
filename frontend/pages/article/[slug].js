@@ -5,6 +5,8 @@ import Layout from "../../components/layout";
 import Image from "../../components/image";
 import Seo from "../../components/seo";
 import { getStrapiMedia } from "../../lib/media";
+import React, {  useEffect } from 'react'
+
 
 const Article = ({ article, categories }) => {
   const imageUrl = getStrapiMedia(article.image);
@@ -21,7 +23,10 @@ const Article = ({ article, categories }) => {
   } else {
     console.log("author not found")
   }
-
+  //OPEN ARTICLES AT SCROLL POSITION
+  useEffect(()=> {
+    window.scrollTo(0,400)
+  })
   return (
     <Layout categories={categories}>
       <Seo seo={seo} />

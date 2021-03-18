@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import D3Component from './D3Component';
 import ApolloClientInterface from "../lib/apolloClient"
 import ApolloClient from "apollo-client";
@@ -27,6 +27,33 @@ export default function ForceDirectedNav(props) {
                 }
               }`).then(result => { return result })
 
+        // Scroll detection code: https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
+    const ourRef = useRef(null);
+
+    useLayoutEffect(() => {
+        const topPosition = refElement.current.getBoundingClientRect().top;
+        const onScroll = () => {
+        const scrollPosition = window.scrollY + window.innerHeight;
+        if(topPosition < scrollPosition) { 
+        // trigger animation 
+        console.log(topPosition, scrollPosition)
+        }
+        if (scrollPosition>1000){
+            console.log("scroll pos over 1000")
+            document.getElementById("react-world").classList.add("blur")
+        } 
+        if (scrollPosition<1000){
+            document.getElementById("react-world").classList.remove("blur")
+        }
+        };
+
+        window.addEventListener("scroll", onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
+        /* 
+        remove the event listener in the cleanup function 
+        to prevent memory leaks
+        */
+    }, []);
 
 
 
