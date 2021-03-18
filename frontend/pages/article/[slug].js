@@ -31,6 +31,7 @@ const Article = ({ article, categories }) => {
     <Layout categories={categories}>
       <Seo seo={seo} />
       <div className="article-wrapper">   
+
         <div className="centering-container">
           <div
             id="banner"

@@ -26,14 +26,9 @@ const Home = ({ articles, categories, homepage }) => {
       {/* </ApolloProvider> */}
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
-
-        <html xmlnsXlinkk="http://www.w3.org/1999/xlink"></html>
-        <script src="https://d3js.org/d3.v6.min.js"></script>
-
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous"></link>
 
         <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" ></link>
       </Head>
       <Layout categories={categories} > 
       <Seo seo={homepage.seo} />

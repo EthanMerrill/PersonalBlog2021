@@ -43,7 +43,7 @@ class D3Component {
 
 
     buildNetwork = (data, chartRef, svg, width, height) => {
-        console.log(data)
+        // console.log(data)
         function linkFinder(data) {
             let node_links = []
             
@@ -130,7 +130,6 @@ class D3Component {
             //     return d.id;
             // })
             .attr("xlink:href", function (d) {
-                console.log(d.group, d.url, d.slug)
                 if (d.url != null){
                     return ("xlink:href", d.url)
                 } else if (d.group != null && d.slug != null && d.slug != undefined){
@@ -183,11 +182,9 @@ class D3Component {
             .attr("opacity", .5)
 
 
-
-
-        const icons = hyperlink.append('icon')
+        const icons = hyperlink.append('text')
             // .attr('class', 'handle')
-            .attr('font-family', 'FontAwesome')
+            .attr('class', "fa")
             .attr("text-anchor", "middle")
             .attr('alignment-baseline', "middle")
             .attr('width', 28)
@@ -195,6 +192,9 @@ class D3Component {
             .attr('x', -10)
             .attr('y', -10)
             .attr("class", d => d.icon)
+            .attr("text", function(d){ 
+                console.log(d.icon)
+            return d.icon})
 
 
 

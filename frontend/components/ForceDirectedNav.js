@@ -35,11 +35,9 @@ export default function ForceDirectedNav(props) {
         const onScroll = () => {
         const scrollPosition = window.scrollY + window.innerHeight;
         if(topPosition < scrollPosition) { 
-        // trigger animation 
-        console.log(topPosition, scrollPosition)
+        // trigger animation if anything is scolled at all
         }
         if (scrollPosition>1000){
-            console.log("scroll pos over 1000")
             document.getElementById("react-world").classList.add("blur")
         } 
         if (scrollPosition<1000){
@@ -121,7 +119,10 @@ export default function ForceDirectedNav(props) {
     // }
 
     return (
+        
         <div id='react-world' className='react-world'>
+            <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
+
             <div>{active}</div>
             <div id="d3-div" className=" d3-div" ref={refElement} />
         </div>
