@@ -8,9 +8,7 @@ const Nav = ({ categories }) => {
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li>
-              <Link href="/">
-                <a>Strapi Blog</a>
-              </Link>
+
             </li>
           </ul>
         </div>

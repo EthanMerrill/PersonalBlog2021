@@ -45,7 +45,7 @@ query{
 TODO:
 
 
-- [ ] Add a persistent home button to the nav via the force directed nav component
+- [x] Add a persistent home button to the nav via the force directed nav component
 - [x] figure out why icons disappear on everything but home page
 - [ ] Working post pages.
     - [ ] write error handling for newly optional fields such as author, image PersonalBlog2021\frontend\pages\article\[slug].js
@@ -53,3 +53,4 @@ TODO:
 - [x] force directed graph tooltips with a description of the article 
 - [ ] setup free serverless hosting on AWS or gcloud depending on which is more free
 - [ ] make tooltips the card component
+- [ ] Make the force directed nav change when screen size changes. Use case: phone rotates, window resized. 

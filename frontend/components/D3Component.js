@@ -192,10 +192,6 @@ class D3Component {
             .attr('x', -10)
             .attr('y', -10)
             .attr("class", d => d.icon)
-            .attr("text", function(d){ 
-                console.log(d.icon)
-            return d.icon})
-
 
 
 
@@ -212,24 +208,36 @@ class D3Component {
         });
 
         width, height = resize();
-        d3.select(window).on("resize", resize());
-
+        d3.select("#d3-div").on("resize", console.log('resized@!!'));
         function resize() {
-            //get the element containing the d3 and use client height and width attributes to get the size of this element and set the size of the svg as the same size
+                //get the element containing the d3 and use client height and width attributes to get the size of this element and set the size of the svg as the same size
             let parentElement = document.getElementById('d3-div')
-            // console.log(parentElement)
             width = parentElement.clientWidth, height = parentElement.clientHeight;
             svg.attr("width", width).attr("height", height);
-            // console.log(width, height)
+            console.log(width, height)
             simulation.force("center", d3.forceCenter(width / 2, height / 2)).restart();
             return svg.attr("width"), svg.attr('height')
         }
 
+
         return svg.node();
     };
 
+    // testFunction = (svg) => {
+    //     console.log("TEST FUNC")
+    //     let parentElement = document.getElementById('d3-div')
+    //     console.log(`parent ELEM: ${parentElement.clientWidth}`)
+    //     width = parentElement.clientWidth, height = parentElement.clientHeight;
+    //     // svg.attr("width", width).attr("height", height);
+    //     console.log(width, height)
+    //     simulation.force("center", d3.forceCenter(width / 2, height / 2)).restart();
+    //     // return svg.attr("width"), svg.attr('height')
+    // }
+
 
 }
+
+// width, height = resize();
 
 
 

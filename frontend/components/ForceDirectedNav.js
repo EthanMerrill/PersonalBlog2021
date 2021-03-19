@@ -3,6 +3,7 @@ import D3Component from './D3Component';
 import ApolloClientInterface from "../lib/apolloClient"
 import ApolloClient from "apollo-client";
 import { GraphQLInputObjectType } from 'graphql';
+import Link from "next/link";
 let vis;
 // https://medium.com/@stopyransky/react-hooks-and-d3-39be1d900fb
 export default function ForceDirectedNav(props) {
@@ -53,6 +54,17 @@ export default function ForceDirectedNav(props) {
         */
     }, []);
 
+    // call the d3 rezize function when the window is resized:
+    // useLayoutEffect(() => {
+    //     const onResize = () => {
+    //         console.log(vis.svg)
+    //         vis.testFunction(vis.svg)
+    //     }
+    //            // d3.select(window).on("resize", resize());
+    //     window.addEventListener("resize", onResize);
+    //     return () => window.removeEventListener("resize", onResize)
+    // })
+
 
 
     const [data, setData] = useState(null);
@@ -62,7 +74,7 @@ export default function ForceDirectedNav(props) {
     const refElement = useRef(null);
     useEffect(fetchData, []);
     // useEffect(handleResizeEvent, []);
-    useEffect(initVis, [data]);
+    var vis = useEffect(initVis, [data]);
     // useEffect(updateVisOnResize, [width, height]);
 
     function fetchData() {
@@ -97,7 +109,8 @@ export default function ForceDirectedNav(props) {
     }
 
     function initVis() {
-
+        // handleResizeEvent()
+        // console.log(width)
         if (data) {
             const d3Props = {
                 data,
@@ -119,12 +132,16 @@ export default function ForceDirectedNav(props) {
     // }
 
     return (
-        
-        <div id='react-world' className='react-world'>
-            <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
-
-            <div>{active}</div>
-            <div id="d3-div" className=" d3-div" ref={refElement} />
+        <div className = "background-nav">
+              <Link href="/">
+                <a className="name-homebutton"><h1>Ethan Merrill</h1></a>
+              </Link>
+            <div id='react-world' className='react-world'>
+                <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
+ 
+                <div>{active}</div>
+                <div id="d3-div" className=" d3-div" ref={refElement} />
+            </div>
         </div>
     );
 }

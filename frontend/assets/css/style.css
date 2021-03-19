@@ -43,7 +43,7 @@ img:hover {
 
 .article-wrapper {
   position:sticky;
-  z-index: 100;
+  z-index: 1;
   
 }
 
@@ -78,6 +78,33 @@ img:hover {
   height:900px;
   
 } */
+
+.background-nav{
+  /* position:fixed; */
+}
+
+.name-homebutton {
+  z-index: 102;
+  position:fixed;
+  transform: rotate(-90deg);
+  top:70px;
+  left:-64px;
+  padding:8px;
+  background-color: rgba(158, 6, 39, 0.9);
+  border-radius: 2px;
+
+}
+
+.name-homebutton * {
+  color:white;
+  font-size: 30px;
+  margin:0;
+}
+
+.name-homebutton :hover {
+  text-decoration: none;
+  box-shadow:.1em
+}
 
 .react-world{
   height:900px;
