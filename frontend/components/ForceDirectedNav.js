@@ -30,6 +30,10 @@ export default function ForceDirectedNav(props) {
 
         // Scroll detection code: https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
     const ourRef = useRef(null);
+// https://dev.to/adrien/creating-a-custom-react-hook-to-get-the-window-s-dimensions-in-next-js-135k
+// Need to do whats in this article because when using static rendering with nextjs things go weird
+
+
 
     useLayoutEffect(() => {
         const topPosition = refElement.current.getBoundingClientRect().top;
@@ -137,10 +141,10 @@ export default function ForceDirectedNav(props) {
                 <a className="name-homebutton"><h1>Ethan Merrill</h1></a>
               </Link>
             <div id='react-world' className='react-world'>
-                <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
+                <script src="https://kit.fontawesome.com/374cfc1460.js" crossOrigin="anonymous"></script>
  
                 <div>{active}</div>
-                <div id="d3-div" className=" d3-div" ref={refElement} />
+                <div id="d3-div" className=" d3-div" ref={refElement}></div>
             </div>
         </div>
     );

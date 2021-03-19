@@ -11,8 +11,10 @@
   },
   "devDependencies": {},
   "dependencies": {
+    "dependencies": "0.0.1",
     "knex": "<0.20.0",
     "mime-types": "^2.1.27",
+    "next": "^10.0.9",
     "sqlite3": "latest",
     "strapi": "3.4.1",
     "strapi-admin": "3.4.1",

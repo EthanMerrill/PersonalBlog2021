@@ -18,6 +18,8 @@ const Article = ({ article, categories }) => {
     article: true,
   };
 
+  console.log(article)
+
   if (article.author) {
     console.log("Author  found")
   } else {
