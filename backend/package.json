@@ -7,7 +7,8 @@
     "develop": "strapi develop",
     "start": "strapi start",
     "build": "strapi build",
-    "strapi": "strapi"
+    "strapi": "strapi",
+    "gcp-build": "strapi build"
   },
   "devDependencies": {},
   "dependencies": {
@@ -15,17 +16,18 @@
     "knex": "<0.20.0",
     "mime-types": "^2.1.27",
     "next": "^10.0.9",
+    "pg": "^8.6.0",
     "sqlite3": "latest",
-    "strapi": "3.4.1",
-    "strapi-admin": "3.4.1",
-    "strapi-connector-bookshelf": "3.4.1",
-    "strapi-plugin-content-manager": "3.4.1",
-    "strapi-plugin-content-type-builder": "3.4.1",
-    "strapi-plugin-email": "3.4.1",
-    "strapi-plugin-graphql": "^3.4.1",
-    "strapi-plugin-upload": "3.4.1",
-    "strapi-plugin-users-permissions": "3.4.1",
-    "strapi-utils": "3.4.1"
+    "strapi": "^3.5.4",
+    "strapi-admin": "^3.5.4",
+    "strapi-connector-bookshelf": "^3.5.4",
+    "strapi-plugin-content-manager": "^3.5.4",
+    "strapi-plugin-content-type-builder": "^3.5.4",
+    "strapi-plugin-email": "^3.5.4",
+    "strapi-plugin-graphql": "^3.5.4",
+    "strapi-plugin-upload": "^3.5.4",
+    "strapi-plugin-users-permissions": "^3.5.4",
+    "strapi-utils": "^3.5.4"
   },
   "author": {
     "name": "A Strapi developer"
