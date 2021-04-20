@@ -83,6 +83,7 @@ class D3Component {
         const nodes = data.nodes
         const links = linkFinder(data)
 
+        const iconSize = 48
 
         const labelsNodes = data.nodes.map(d => Object.create(d));
 
@@ -166,12 +167,14 @@ class D3Component {
             .style('font-size', '16px')
             .attr("text-anchor", "middle")
             .attr('x', 0)
-            .attr('y', (d => radius(d.group) + 21))
+            .attr('y', (d => {
+                if(d.icon == null ){return radius(d.group)+15} else{ return (iconSize)}
+        }))
 
-        const circles = hyperlink.append("circle")
+        const visibleCircles = hyperlink.append("circle")
             .filter(function (d) {
-                // console.log(d)
-                return ((d.group == "Post") || (d.group == "Bio"))
+                // If it doesn't have an icon, give it a circle
+                return (d.icon == null)
             })
             .attr("class", "circle")
             .attr("stroke", d => border(d.group))
@@ -180,6 +183,16 @@ class D3Component {
             .attr("fill", d => color(d.group))
             // .attr("fill", "red")
             .attr("opacity", .5)
+        
+        const touchTargetCircles = hyperlink.append("circle")
+            .filter(function (d) {
+                // If it doesn't have an icon, give it a circle
+                return (d.icon != null)
+            })
+            .attr("class", "circle")
+            .attr("r", 40)
+            .attr("visibility", "visible")
+            .attr("opacity",0)
 
 
         const icons = hyperlink.append('text')
@@ -187,12 +200,11 @@ class D3Component {
             .attr('class', "fa")
             .attr("text-anchor", "middle")
             .attr('alignment-baseline', "middle")
-            .attr('width', 28)
-            .attr('height', 28)
-            .attr('x', -10)
-            .attr('y', -10)
+            .attr('width', iconSize)
+            .attr('height', iconSize)
+            .attr('x', -(iconSize/2))
+            .attr('y', -(iconSize/2))
             .attr("class", d => d.icon)
-
 
 
         simulation.on("tick", () => {

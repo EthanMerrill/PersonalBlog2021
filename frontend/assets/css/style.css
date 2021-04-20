@@ -1,10 +1,16 @@
 a {
   text-decoration: none;
+  color:hsl(347, 93%, 32%);
+}
+
+a:hover{
+  color: hsl(347, 100%, 42%)
 }
 
 h1 {
   font-family: Staatliches;
   font-size: 120px;
+  color: rgb(34,49,75);
 }
 
 #category {
@@ -32,7 +38,6 @@ h1 {
 }
 
 .uk-navbar-container {
-  background: #fff !important;
   font-family: Staatliches;
 }
 
@@ -44,7 +49,7 @@ img:hover {
 .article-wrapper {
   position:sticky;
   z-index: 1;
-  
+  padding-bottom: 30px;
 }
 
 .centering-container{
@@ -52,8 +57,8 @@ img:hover {
   width:90%;
   position:relative;
   margin: auto;
-  background-color: orange;  
-  border-radius: 3px;
+  background-color: rgb(229,230,217);  
+  border-radius: 5px;
   padding: 5px;
 }
 
@@ -62,6 +67,8 @@ img:hover {
   height:80vh;
 
 }
+
+/* HomePage Articles */
 
 
 /* D3 Nav Section */
@@ -82,6 +89,8 @@ img:hover {
 .background-nav{
   /* position:fixed; */
 }
+
+
 
 .name-homebutton {
   z-index: 102;
@@ -115,7 +124,7 @@ img:hover {
 }
 
 .blur {
-  filter:blur(5px);
+  filter:opacity(.1);
 }
 
 
@@ -131,4 +140,10 @@ img:hover {
   border-radius: 4px;
   background-color: #f7f7f8;
   padding:5px
+}
+
+
+
+.uk-card-primary.uk-card-body .uk-h1, .uk-card-primary.uk-card-body .uk-h2, .uk-card-primary.uk-card-body .uk-h3, .uk-card-primary.uk-card-body .uk-h4, .uk-card-primary.uk-card-body .uk-h5, .uk-card-primary.uk-card-body .uk-h6, .uk-card-primary.uk-card-body .uk-heading-2xlarge, .uk-card-primary.uk-card-body .uk-heading-large, .uk-card-primary.uk-card-body .uk-heading-medium, .uk-card-primary.uk-card-body .uk-heading-small, .uk-card-primary.uk-card-body .uk-heading-xlarge, .uk-card-primary.uk-card-body h1, .uk-card-primary.uk-card-body h2, .uk-card-primary.uk-card-body h3, .uk-card-primary.uk-card-body h4, .uk-card-primary.uk-card-body h5, .uk-card-primary.uk-card-body h6, .uk-card-primary>:not([class*=uk-card-media]) .uk-h1, .uk-card-primary>:not([class*=uk-card-media]) .uk-h2, .uk-card-primary>:not([class*=uk-card-media]) .uk-h3, .uk-card-primary>:not([class*=uk-card-media]) .uk-h4, .uk-card-primary>:not([class*=uk-card-media]) .uk-h5, .uk-card-primary>:not([class*=uk-card-media]) .uk-h6, .uk-card-primary>:not([class*=uk-card-media]) .uk-heading-2xlarge, .uk-card-primary>:not([class*=uk-card-media]) .uk-heading-large, .uk-card-primary>:not([class*=uk-card-media]) .uk-heading-medium, .uk-card-primary>:not([class*=uk-card-media]) .uk-heading-small, .uk-card-primary>:not([class*=uk-card-media]) .uk-heading-xlarge, .uk-card-primary>:not([class*=uk-card-media]) h1, .uk-card-primary>:not([class*=uk-card-media]) h2, .uk-card-primary>:not([class*=uk-card-media]) h3, .uk-card-primary>:not([class*=uk-card-media]) h4, .uk-card-primary>:not([class*=uk-card-media]) h5, .uk-card-primary>:not([class*=uk-card-media]) h6, .uk-card-secondary.uk-card-body .uk-h1, .uk-card-secondary.uk-card-body .uk-h2, .uk-card-secondary.uk-card-body .uk-h3, .uk-card-secondary.uk-card-body .uk-h4, .uk-card-secondary.uk-card-body .uk-h5, .uk-card-secondary.uk-card-body .uk-h6, .uk-card-secondary.uk-card-body .uk-heading-2xlarge, .uk-card-secondary.uk-card-body .uk-heading-large, .uk-card-secondary.uk-card-body .uk-heading-medium, .uk-card-secondary.uk-card-body .uk-heading-small, .uk-card-secondary.uk-card-body .uk-heading-xlarge, .uk-card-secondary.uk-card-body h1, .uk-card-secondary.uk-card-body h2, .uk-card-secondary.uk-card-body h3, .uk-card-secondary.uk-card-body h4, .uk-card-secondary.uk-card-body h5, .uk-card-secondary.uk-card-body h6, .uk-card-secondary>:not([class*=uk-card-media]) .uk-h1, .uk-card-secondary>:not([class*=uk-card-media]) .uk-h2, .uk-card-secondary>:not([class*=uk-card-media]) .uk-h3, .uk-card-secondary>:not([class*=uk-card-media]) .uk-h4, .uk-card-secondary>:not([class*=uk-card-media]) .uk-h5, .uk-card-secondary>:not([class*=uk-card-media]) .uk-h6, .uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-2xlarge, .uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-large, .uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-medium, .uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-small, .uk-card-secondary>:not([class*=uk-card-media]) .uk-heading-xlarge, .uk-card-secondary>:not([class*=uk-card-media]) h1, .uk-card-secondary>:not([class*=uk-card-media]) h2, .uk-card-secondary>:not([class*=uk-card-media]) h3, .uk-card-secondary>:not([class*=uk-card-media]) h4, .uk-card-secondary>:not([class*=uk-card-media]) h5, .uk-card-secondary>:not([class*=uk-card-media]) h6, .uk-light .uk-h1, .uk-light .uk-h2, .uk-light .uk-h3, .uk-light .uk-h4, .uk-light .uk-h5, .uk-light .uk-h6, .uk-light .uk-heading-2xlarge, .uk-light .uk-heading-large, .uk-light .uk-heading-medium, .uk-light .uk-heading-small, .uk-light .uk-heading-xlarge, .uk-light h1, .uk-light h2, .uk-light h3, .uk-light h4, .uk-light h5, .uk-light h6, .uk-offcanvas-bar .uk-h1, .uk-offcanvas-bar .uk-h2, .uk-offcanvas-bar .uk-h3, .uk-offcanvas-bar .uk-h4, .uk-offcanvas-bar .uk-h5, .uk-offcanvas-bar .uk-h6, .uk-offcanvas-bar .uk-heading-2xlarge, .uk-offcanvas-bar .uk-heading-large, .uk-offcanvas-bar .uk-heading-medium, .uk-offcanvas-bar .uk-heading-small, .uk-offcanvas-bar .uk-heading-xlarge, .uk-offcanvas-bar h1, .uk-offcanvas-bar h2, .uk-offcanvas-bar h3, .uk-offcanvas-bar h4, .uk-offcanvas-bar h5, .uk-offcanvas-bar h6, .uk-overlay-primary .uk-h1, .uk-overlay-primary .uk-h2, .uk-overlay-primary .uk-h3, .uk-overlay-primary .uk-h4, .uk-overlay-primary .uk-h5, .uk-overlay-primary .uk-h6, .uk-overlay-primary .uk-heading-2xlarge, .uk-overlay-primary .uk-heading-large, .uk-overlay-primary .uk-heading-medium, .uk-overlay-primary .uk-heading-small, .uk-overlay-primary .uk-heading-xlarge, .uk-overlay-primary h1, .uk-overlay-primary h2, .uk-overlay-primary h3, .uk-overlay-primary h4, .uk-overlay-primary h5, .uk-overlay-primary h6, .uk-section-primary:not(.uk-preserve-color) .uk-h1, .uk-section-primary:not(.uk-preserve-color) .uk-h2, .uk-section-primary:not(.uk-preserve-color) .uk-h3, .uk-section-primary:not(.uk-preserve-color) .uk-h4, .uk-section-primary:not(.uk-preserve-color) .uk-h5, .uk-section-primary:not(.uk-preserve-color) .uk-h6, .uk-section-primary:not(.uk-preserve-color) .uk-heading-2xlarge, .uk-section-primary:not(.uk-preserve-color) .uk-heading-large, .uk-section-primary:not(.uk-preserve-color) .uk-heading-medium, .uk-section-primary:not(.uk-preserve-color) .uk-heading-small, .uk-section-primary:not(.uk-preserve-color) .uk-heading-xlarge, .uk-section-primary:not(.uk-preserve-color) h1, .uk-section-primary:not(.uk-preserve-color) h2, .uk-section-primary:not(.uk-preserve-color) h3, .uk-section-primary:not(.uk-preserve-color) h4, .uk-section-primary:not(.uk-preserve-color) h5, .uk-section-primary:not(.uk-preserve-color) h6, .uk-section-secondary:not(.uk-preserve-color) .uk-h1, .uk-section-secondary:not(.uk-preserve-color) .uk-h2, .uk-section-secondary:not(.uk-preserve-color) .uk-h3, .uk-section-secondary:not(.uk-preserve-color) .uk-h4, .uk-section-secondary:not(.uk-preserve-color) .uk-h5, .uk-section-secondary:not(.uk-preserve-color) .uk-h6, .uk-section-secondary:not(.uk-preserve-color) .uk-heading-2xlarge, .uk-section-secondary:not(.uk-preserve-color) .uk-heading-large, .uk-section-secondary:not(.uk-preserve-color) .uk-heading-medium, .uk-section-secondary:not(.uk-preserve-color) .uk-heading-small, .uk-section-secondary:not(.uk-preserve-color) .uk-heading-xlarge, .uk-section-secondary:not(.uk-preserve-color) h1, .uk-section-secondary:not(.uk-preserve-color) h2, .uk-section-secondary:not(.uk-preserve-color) h3, .uk-section-secondary:not(.uk-preserve-color) h4, .uk-section-secondary:not(.uk-preserve-color) h5, .uk-section-secondary:not(.uk-preserve-color) h6, .uk-tile-primary:not(.uk-preserve-color) .uk-h1, .uk-tile-primary:not(.uk-preserve-color) .uk-h2, .uk-tile-primary:not(.uk-preserve-color) .uk-h3, .uk-tile-primary:not(.uk-preserve-color) .uk-h4, .uk-tile-primary:not(.uk-preserve-color) .uk-h5, .uk-tile-primary:not(.uk-preserve-color) .uk-h6, .uk-tile-primary:not(.uk-preserve-color) .uk-heading-2xlarge, .uk-tile-primary:not(.uk-preserve-color) .uk-heading-large, .uk-tile-primary:not(.uk-preserve-color) .uk-heading-medium, .uk-tile-primary:not(.uk-preserve-color) .uk-heading-small, .uk-tile-primary:not(.uk-preserve-color) .uk-heading-xlarge, .uk-tile-primary:not(.uk-preserve-color) h1, .uk-tile-primary:not(.uk-preserve-color) h2, .uk-tile-primary:not(.uk-preserve-color) h3, .uk-tile-primary:not(.uk-preserve-color) h4, .uk-tile-primary:not(.uk-preserve-color) h5, .uk-tile-primary:not(.uk-preserve-color) h6, .uk-tile-secondary:not(.uk-preserve-color) .uk-h1, .uk-tile-secondary:not(.uk-preserve-color) .uk-h2, .uk-tile-secondary:not(.uk-preserve-color) .uk-h3, .uk-tile-secondary:not(.uk-preserve-color) .uk-h4, .uk-tile-secondary:not(.uk-preserve-color) .uk-h5, .uk-tile-secondary:not(.uk-preserve-color) .uk-h6, .uk-tile-secondary:not(.uk-preserve-color) .uk-heading-2xlarge, .uk-tile-secondary:not(.uk-preserve-color) .uk-heading-large, .uk-tile-secondary:not(.uk-preserve-color) .uk-heading-medium, .uk-tile-secondary:not(.uk-preserve-color) .uk-heading-small, .uk-tile-secondary:not(.uk-preserve-color) .uk-heading-xlarge, .uk-tile-secondary:not(.uk-preserve-color) h1, .uk-tile-secondary:not(.uk-preserve-color) h2, .uk-tile-secondary:not(.uk-preserve-color) h3, .uk-tile-secondary:not(.uk-preserve-color) h4, .uk-tile-secondary:not(.uk-preserve-color) h5, .uk-tile-secondary:not(.uk-preserve-color) h6 {
+    color: rgb(34,49,75);
 }
