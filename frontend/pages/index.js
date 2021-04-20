@@ -16,7 +16,7 @@ import { fetchAPI } from "../lib/api";
 
 const Home = ({ articles, categories, homepage }) => {
 
-
+  console.log( articles, categories, homepage)
 
   return (
     <div>

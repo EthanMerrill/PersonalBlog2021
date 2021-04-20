@@ -111,7 +111,7 @@ img:hover {
   position:fixed;
   /* filter:blur(5px); */
   width:100%;
-  transition: height 2s, filter 1.5s;
+  transition: height 1s, filter .5s;
 }
 
 .blur {

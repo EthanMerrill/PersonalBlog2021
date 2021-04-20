@@ -8,7 +8,8 @@ let vis;
 // https://medium.com/@stopyransky/react-hooks-and-d3-39be1d900fb
 export default function ForceDirectedNav(props) {
 
-    const APCI = new ApolloClientInterface("http://localhost:1337/graphql")
+    const APCI = new ApolloClientInterface(`https://ethanmerrillwebsite.ue.r.appspot.com/graphql`)
+    console.log(APCI)
     let graphData = APCI.query(`
             query{
                 articles{
