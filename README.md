@@ -51,6 +51,8 @@ TODO:
     - [ ] write error handling for newly optional fields such as author, image PersonalBlog2021\frontend\pages\article\[slug].js
 - [x] Routing in the force directed nav.
 - [x] force directed graph tooltips with a description of the article 
-- [ ] setup free serverless hosting on AWS or gcloud depending on which is more free
+- [x] setup free serverless hosting on AWS or gcloud depending on which is more free
 - [ ] make tooltips the card component
 - [ ] Make the force directed nav change when screen size changes. Use case: phone rotates, window resized. 
+- [ ] change opacity and size of nodes based on publish date distance from today
+- [ ] add a intro usability guide

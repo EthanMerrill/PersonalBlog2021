@@ -139,6 +139,7 @@ class D3Component {
                 
             })
             .attr('class', "hyperlink")
+
             .on("mouseover", function (d, i) {
                 return tooltip.style("visibility", "visible").text(i.description)
             })
@@ -158,18 +159,27 @@ class D3Component {
             .attr("id", "tooltip")
             // .text("I'm a circle!");
             
-
+        // const textContainer = hyperlink.append('tspan')
+        // .style('width', '100%')
+        // .style('height','100%')
+        // .style('max-width', d => {
+        //     if(d.radius){ return d.radius*2}
+        //     else{return iconSize*2}
+        // })
         const text = hyperlink.append('text')
             .text(function (d) {
                 return d.id;
             })
             .style('fill', '#000')
             .style('font-size', '16px')
+            .style('z-index','100')
             .attr("text-anchor", "middle")
+            .attr('class','caption')
             .attr('x', 0)
             .attr('y', (d => {
                 if(d.icon == null ){return radius(d.group)+15} else{ return (iconSize)}
         }))
+
 
         const visibleCircles = hyperlink.append("circle")
             .filter(function (d) {
@@ -177,7 +187,7 @@ class D3Component {
                 return (d.icon == null)
             })
             .attr("class", "circle")
-            .attr("stroke", d => border(d.group))
+            .attr("stroke", d => 'black')
             .attr("stroke-width", 1.5)
             .attr("r", d => radius(d.group))
             .attr("fill", d => color(d.group))
@@ -209,13 +219,12 @@ class D3Component {
 
         simulation.on("tick", () => {
             link
-
                 .attr("x1", d => Math.max(80, Math.min(width - 80, d.source.x)))
                 .attr("y1", d => Math.max(radius(d.group), Math.min(height, d.source.y)))
                 .attr("x2", d => Math.max(80, Math.min(width - 80, d.target.x)))
                 .attr("y2", d => Math.max(radius(d.group), Math.min(height, d.target.y)));
             node
-                .attr("transform", d => `translate(${Math.max(radius(d.group), Math.min(width - radius(d.group), d.x))}, ${Math.max(radius(d.group), Math.min(height - radius(d.group), d.y))})`);
+                .attr("transform", d => `translate(${Math.max(radius(d.group), Math.min(width - radius(d.group), d.x))}, ${Math.max(radius(d.group), Math.min(height - radius(d.group)-15, d.y))})`);
 
         });
 
@@ -280,9 +289,9 @@ const drag = simulation => {
 }
 
 
-const color = d3.scaleOrdinal([" #4f5d75", "#FFBA08", "green", "orange"])
+const color = d3.scaleOrdinal([" ##9cbbe1", "##7ce6b6", "green", "orange"])
 
-const radius = d3.scaleOrdinal([50, 25, 20, 8])
+const radius = d3.scaleOrdinal([8, 25, 20, 8])
 
 
 const border = (group) => {
