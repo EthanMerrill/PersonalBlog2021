@@ -141,6 +141,7 @@ export default function ForceDirectedNav(props) {
               <Link href="/">
                 <a className="name-homebutton"><h1>Ethan Merrill</h1></a>
               </Link>
+              <div className='offset-block'></div>
             <div id='react-world' className='react-world'>
                 <script src="https://kit.fontawesome.com/374cfc1460.js" crossOrigin="anonymous"></script>
  

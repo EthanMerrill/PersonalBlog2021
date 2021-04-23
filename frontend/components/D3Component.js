@@ -85,7 +85,7 @@ class D3Component {
         const links = linkFinder(data)
 
         const iconSize = 48
-        const rectWidth = 120
+        const rectWidth = 150
 
         const labelsNodes = data.nodes.map(d => Object.create(d));
 
@@ -183,17 +183,24 @@ class D3Component {
                 return d.id;
             })
             .style('fill', '#000')
-            .style('font-size', '16px')
+            .style('font-size', '14px')
             .style('z-index','100')
             .attr("text-anchor", "middle")
             .attr('class','caption')
             .attr('x', 0)
-            .attr('y',-3)
+            .attr('y', function(d){
+                if(d.icon!=null){
+                    return iconSize-3
+                } else {
+                    return -3
+                }
+            })
             .attr('dy', .01)
-        //     .attr('y', (d => {
-        //         if(d.icon == null ){return radius(d.group)+15} else{ return (iconSize)}
-        // }))
             .call(wrap, rectWidth)
+            .filter(d=>{
+
+            })
+            
 
         //set the height of the rectangle to match the length of the text
         hyperlink.select('text').selectAll('tspan').call(function(d){
@@ -205,7 +212,7 @@ class D3Component {
                 lastLineHeight = (parseFloat(lastLineHeight.match(/\d+|.\d+/g).join(""))+2).toPrecision(3)
                 //convert back to string, change to em
                 lastLineHeight = String(lastLineHeight+'em')
-                console.log(lastLineHeight)
+                // console.log(lastLineHeight)
                 var useless = [...d._groups[i]].slice(-1)[0].parentNode.parentNode.getElementsByTagName('rect')[0].setAttribute('height',lastLineHeight)
             }
         }
@@ -253,11 +260,16 @@ class D3Component {
         simulation.on("tick", () => {
             link
                 .attr("x1", d => Math.max(80, Math.min(width - 80, d.source.x)))
-                .attr("y1", d => Math.max(radius(d.group), Math.min(height, d.source.y)))
+                .attr("y1", d => Math.max(rectWidth/3, Math.min(height, d.source.y)))
                 .attr("x2", d => Math.max(80, Math.min(width - 80, d.target.x)))
-                .attr("y2", d => Math.max(radius(d.group), Math.min(height, d.target.y)));
+                .attr("y2", d => Math.max(rectWidth/3, Math.min(height, d.target.y)));
+
+                // .attr("x1", d => d.source.x)
+                // .attr("y1", d => d.source.y)
+                // .attr("x2", d => d.target.x)
+                // .attr("y2", d => d.target.y)
             node
-                .attr("transform", d => `translate(${Math.max(radius(d.group), Math.min(width - radius(d.group), d.x))}, ${Math.max(radius(d.group), Math.min(height - radius(d.group)-15, d.y))})`);
+                .attr("transform", d => `translate(${Math.max(rectWidth/3, Math.min(width - rectWidth/3, d.x))}, ${Math.max(rectWidth/3, Math.min(height - rectWidth/3-15, d.y))})`);
 
         });
 

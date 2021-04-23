@@ -9,7 +9,10 @@ import React, {  useEffect } from 'react'
 
 
 const Article = ({ article, categories }) => {
+
   const imageUrl = getStrapiMedia(article.image);
+
+
 
   const seo = {
     metaTitle: article.title,
@@ -18,16 +21,15 @@ const Article = ({ article, categories }) => {
     article: true,
   };
 
-  console.log(article)
-
   if (article.author) {
     console.log("Author  found")
+
   } else {
     console.log("author not found")
   }
   //OPEN ARTICLES AT SCROLL POSITION
   useEffect(()=> {
-    window.scrollTo(0,400)
+    window.scrollTo(0,350)
   })
   return (
     <Layout categories={categories}>
@@ -40,7 +42,7 @@ const Article = ({ article, categories }) => {
             className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
             data-src={imageUrl}
             data-srcset={imageUrl}
-            data-uk-img
+            data-uk-img = {imageUrl}
           >
             <h1>{article.title}</h1>
           </div>

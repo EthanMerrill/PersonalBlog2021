@@ -4,20 +4,25 @@ const Image = ({ image, style }) => {
 
   try {
     const imageUrl = getStrapiMedia(image);
-    if (imageUrl = false) {
+    console.log(imageUrl)
+    if (imageUrl == false) {
       console.log("image not found")
+      return (<div className="image-not-found"></div>)
+    } else {
+      return (
+        <img
+          src={imageUrl}
+          alt={image.alternativeText || image.name}
+          style={style}
+        />
+      );
+
     }
     
   } catch {
     return (<div className="image-not-found"></div>)
   }
-  return (
-    <img
-      src={imageUrl}
-      alt={image.alternativeText || image.name}
-      style={style}
-    />
-  );
+  
 };
 
 export default Image;
