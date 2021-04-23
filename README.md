@@ -56,3 +56,4 @@ TODO:
 - [ ] Make the force directed nav change when screen size changes. Use case: phone rotates, window resized. 
 - [ ] change opacity and size of nodes based on publish date distance from today
 - [ ] add a intro usability guide
+- [ ] if photo, put title above

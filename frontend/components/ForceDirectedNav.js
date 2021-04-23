@@ -9,7 +9,7 @@ let vis;
 export default function ForceDirectedNav(props) {
 
     const APCI = new ApolloClientInterface(`https://ethanmerrillwebsite.ue.r.appspot.com/graphql`)
-    console.log(APCI)
+    // console.log(APCI)
     let graphData = APCI.query(`
             query{
                 articles{
@@ -97,13 +97,13 @@ export default function ForceDirectedNav(props) {
 
     function handleResizeEvent() {
         let resizeTimer;
-        console.log("handle resize event called")
+        // console.log("handle resize event called")
         const handleResize = () => {
             clearTimeout(resizeTimer);
             resizeTimer = setTimeout(function () {
                 setWidth(window.innerWidth);
                 setHeight(window.innerHeight);
-                console.log(width, height)
+                // console.log(width, height)
             }, 300);
         };
         window.addEventListener('resize', handleResize);

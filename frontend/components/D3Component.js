@@ -1,5 +1,6 @@
 
 import * as d3 from 'd3';
+import { gray, select } from 'd3';
 
 
 class D3Component {
@@ -54,7 +55,7 @@ class D3Component {
                     // node_links.push(nodes.links)
                     // console.log(nodes.links[0].source)
                     nodes.links.forEach(dataLink => {
-                        let onelink = { "source": null, "target": null, "value": 20 }
+                        let onelink = { "source": null, "target": null, "value": 5 }
                         onelink.source = dataLink.source
                         onelink.target = dataLink.target
                         // if (typeof onelink.value == 'undefined') {
@@ -84,6 +85,7 @@ class D3Component {
         const links = linkFinder(data)
 
         const iconSize = 48
+        const rectWidth = 120
 
         const labelsNodes = data.nodes.map(d => Object.create(d));
 
@@ -98,7 +100,7 @@ class D3Component {
         // height = +svg.attr("height");
 
         var attractForce = d3.forceManyBody().strength(1).distanceMax(200).distanceMin(10);
-        var repelForce = d3.forceManyBody().strength(-350).distanceMax(800).distanceMin(1);
+        var repelForce = d3.forceManyBody().strength(-270).distanceMax(450).distanceMin(1);
 
         const simulation = d3.forceSimulation(nodes)
             .force("link", d3.forceLink(links).id(d => d.id).strength(0.09))
@@ -145,7 +147,7 @@ class D3Component {
             })
             .on("mousemove", function (d, i) {
                 
-                return tooltip.style("top", (d.clientY - 10) + "px").style("left", (d.clientX + 50) + "px");
+                return tooltip.style("top", (d.clientY - 10) + "px").style("left", (d.clientX + 40) + "px");
             })
             .on("mouseleave", function (d, i) {
                 return tooltip.style("visibility", "hidden")
@@ -159,13 +161,23 @@ class D3Component {
             .attr("id", "tooltip")
             // .text("I'm a circle!");
             
-        // const textContainer = hyperlink.append('tspan')
-        // .style('width', '100%')
-        // .style('height','100%')
-        // .style('max-width', d => {
-        //     if(d.radius){ return d.radius*2}
-        //     else{return iconSize*2}
+
+        const rect = hyperlink.append("rect")
+        .filter(function (d) {
+            // If it doesn't have an icon, give it a circle
+            return (d.icon == null)
+        })
+        .attr('width', rectWidth)
+        // .attr('height', function(d){
+        //     console.log(wrap(d.id,50))
+
+        //     return 50
         // })
+        .attr('x',-rectWidth/2)
+        .attr('y',-25)
+        .attr('rx', 5)
+        .style('fill', 'gray')
+
         const text = hyperlink.append('text')
             .text(function (d) {
                 return d.id;
@@ -176,33 +188,54 @@ class D3Component {
             .attr("text-anchor", "middle")
             .attr('class','caption')
             .attr('x', 0)
-            .attr('y', (d => {
-                if(d.icon == null ){return radius(d.group)+15} else{ return (iconSize)}
-        }))
+            .attr('y',-3)
+            .attr('dy', .01)
+        //     .attr('y', (d => {
+        //         if(d.icon == null ){return radius(d.group)+15} else{ return (iconSize)}
+        // }))
+            .call(wrap, rectWidth)
 
+        //set the height of the rectangle to match the length of the text
+        hyperlink.select('text').selectAll('tspan').call(function(d){
+ 
+            for (var i = 0; i < (d._groups).length; i++) {
+         
+                var lastLineHeight = ([...d._groups[i]].slice(-1)[0].getAttribute('dy'))
+                //get just the number of last line height, convert to float, add one. 
+                lastLineHeight = (parseFloat(lastLineHeight.match(/\d+|.\d+/g).join(""))+2).toPrecision(3)
+                //convert back to string, change to em
+                lastLineHeight = String(lastLineHeight+'em')
+                console.log(lastLineHeight)
+                var useless = [...d._groups[i]].slice(-1)[0].parentNode.parentNode.getElementsByTagName('rect')[0].setAttribute('height',lastLineHeight)
+            }
+        }
+        )
 
-        const visibleCircles = hyperlink.append("circle")
-            .filter(function (d) {
-                // If it doesn't have an icon, give it a circle
-                return (d.icon == null)
-            })
-            .attr("class", "circle")
-            .attr("stroke", d => 'black')
-            .attr("stroke-width", 1.5)
-            .attr("r", d => radius(d.group))
-            .attr("fill", d => color(d.group))
-            // .attr("fill", "red")
-            .attr("opacity", .5)
+        // .attr('height', function(d){return text.attr('y')})
+
+        // const visibleCircles = hyperlink.append("circle")
+        //     .filter(function (d) {
+        //         // If it doesn't have an icon, give it a circle
+        //         return (d.icon == null)
+        //     })
+        //     .attr("class", "circle")
+        //     .attr("stroke", d => 'black')
+        //     .attr("stroke-width", 1.5)
+        //     .attr("r", d => radius(d.group))
+        //     .attr("fill", d => color(d.group))
+        //     // .attr("fill", "red")
+        //     .attr("opacity", .5)
+
         
-        const touchTargetCircles = hyperlink.append("circle")
-            .filter(function (d) {
-                // If it doesn't have an icon, give it a circle
-                return (d.icon != null)
-            })
-            .attr("class", "circle")
-            .attr("r", 40)
-            .attr("visibility", "visible")
-            .attr("opacity",0)
+        // const touchTargetCircles = hyperlink.append("circle")
+        //     .filter(function (d) {
+        //         // If it doesn't have an icon, give it a circle
+        //         return (d.icon != null)
+        //     })
+        //     .attr("class", "circle")
+        //     .attr("r", 40)
+        //     .attr("visibility", "visible")
+        //     .attr("opacity",0)
 
 
         const icons = hyperlink.append('text')
@@ -235,15 +268,41 @@ class D3Component {
             let parentElement = document.getElementById('d3-div')
             width = parentElement.clientWidth, height = parentElement.clientHeight;
             svg.attr("width", width).attr("height", height);
-            console.log(width, height)
+            // console.log(width, height)
             simulation.force("center", d3.forceCenter(width / 2, height / 2)).restart();
             return svg.attr("width"), svg.attr('height')
         }
 
-
+           // Function to wrap text written by Mike Bostock 
+    function wrap(text, width) {
+        text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.1, // ems
+            y = text.attr("y"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", 0).attr("y", y).attr("dy", dy + "em");
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+            line.pop();
+            tspan.text(line.join(" "));
+            line = [word];
+            tspan = text.append("tspan").attr("x", 0).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+        } 
+        });
+    }
         return svg.node();
     };
 
+
+
+    
     // testFunction = (svg) => {
     //     console.log("TEST FUNC")
     //     let parentElement = document.getElementById('d3-div')
