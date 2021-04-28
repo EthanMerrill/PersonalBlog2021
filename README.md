@@ -1,46 +1,12 @@
 
 
-<a href ="https://github.com/strapi/strapi-starter-next-blog">Operational Docs</a>
-npm run develop
+# Ethan's Portfolio 
 
-# Using GraphQL:
+A website built to showcase Ethan's projects and achievements. Technology used: Strapi CMS with graphql querying hosted on google app engine with a CI/CD connected to github. Frontend: Nextjs hosted and compiled by Vercel. D3 is used for the interactive force directed navigation function.
 
-# Write your query or mutation here
-<a href="https://strapi.io/documentation/developer-docs/latest/plugins/graphql.html#usage">Strapi guide</a>
-1. Start GraphQL:
-(*assumes Graphql plugin has been installed already)
-from within the backend folder run `npm run strapi` 
+Currently the force-directed nav is rebuilt with a query to the app engine every time the site is visited, so it takes a very long time to load because the app engine must spin up an instance each time the site is visited. Fix coming!
 
-2. navigate to http://localhost:1337/graphql 
-3. get JWT token
-```
-mutation {
-  login(input: { identifier: "EMAIL", password: "PASSWORD" provider:"local"}) {
-    jwt
-  }
-}
-```
-4. Put token in header:
-
-{"Authorization": "VERYLONGJWTTOKENHERE"}
-
-5. execute queries:
-
-```
-query{
-  articles{
-		title
-    id
-    category{
-      name
-    }
-    articles {
-      title
-    }
-    	
-  }
-}
-```
+<a href='https://personal-blog2021.vercel.app/'>Site Here</a> 
 
 TODO:
 
@@ -51,9 +17,11 @@ TODO:
     - [ ] write error handling for newly optional fields such as author, image PersonalBlog2021\frontend\pages\article\[slug].js
 - [x] Routing in the force directed nav.
 - [x] force directed graph tooltips with a description of the article 
-- [x] setup free serverless hosting on AWS or gcloud depending on which is more free
+- [x] setup free server-less hosting on AWS or gcloud depending on which is more free
 - [ ] make tooltips the card component
 - [ ] Make the force directed nav change when screen size changes. Use case: phone rotates, window resized. 
 - [ ] change opacity and size of nodes based on publish date distance from today
 - [ ] add a intro usability guide
 - [ ] if photo, put title above
+- [ ] make a mobile navigation option (the site doesn't really work on mobile at the moment)
+- [ ] Modify nav query so that it is only needed at next build time, not at every site visit. Something to do with site re-hydration, static optimization, and getInitialProps in pages/_app
