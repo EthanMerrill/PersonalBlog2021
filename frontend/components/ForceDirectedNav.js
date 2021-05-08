@@ -4,6 +4,7 @@ import ApolloClientInterface from "../lib/apolloClient"
 import ApolloClient from "apollo-client";
 import { GraphQLInputObjectType } from 'graphql';
 import Link from "next/link";
+import {useRouter} from 'next/router'
 let vis;
 // https://medium.com/@stopyransky/react-hooks-and-d3-39be1d900fb
 export default function ForceDirectedNav(props) {
@@ -71,7 +72,7 @@ export default function ForceDirectedNav(props) {
     // })
 
 
-
+    const router = useRouter()
     const [data, setData] = useState(null);
     const [width, setWidth] = useState(null);
     const [height, setHeight] = useState(null);
@@ -123,7 +124,7 @@ export default function ForceDirectedNav(props) {
                 height,
         };
             // console.log(d3Props.width, d3Props.height)
-            vis = new D3Component(refElement.current, d3Props);
+            vis = new D3Component(refElement.current, d3Props, router);
 
         }
     }
@@ -141,13 +142,15 @@ export default function ForceDirectedNav(props) {
               <Link href="/">
                 <a className="name-homebutton"><h1>Ethan Merrill</h1></a>
               </Link>
-              <div className='offset-block'></div>
+              
             <div id='react-world' className='react-world'>
                 <script src="https://kit.fontawesome.com/374cfc1460.js" crossOrigin="anonymous"></script>
  
-                <div>{active}</div>
+                {/* <div>{active}</div> */}
+                
                 <div id="d3-div" className=" d3-div" ref={refElement}></div>
             </div>
+            <div className='top-offset-block'></div>
         </div>
     );
 }

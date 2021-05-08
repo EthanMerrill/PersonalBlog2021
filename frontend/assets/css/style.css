@@ -65,6 +65,7 @@ img:hover {
 .top-offset-block{
   /* Made this block to go behind the d3 chart to allow for interactivity while also moving the article to the bottom of the initial viewport */
   height:80vh;
+  /* position: relative; */
 
 }
 
@@ -78,10 +79,7 @@ img:hover {
   transition: height 2s;
   /* width:100%; */
   background-color: #f4f4f4;
-}
 
-.offset-block{
-  height:40px;
 }
 
 /* 

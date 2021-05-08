@@ -4,6 +4,8 @@ import "../assets/css/style.css";
 import { createContext } from "react";
 import { getStrapiMedia } from "../lib/media";
 import { fetchAPI } from "../lib/api";
+import Layout from "../components/layout"
+import ForceDirectedNav from "../components/ForceDirectedNav"
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});
@@ -31,7 +33,11 @@ const MyApp = ({ Component, pageProps }) => {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js" />
       </Head>
       <GlobalContext.Provider value={global}>
+        <Layout {...pageProps}>
+
+        <ForceDirectedNav/>
         <Component {...pageProps} />
+        </Layout>
       </GlobalContext.Provider>
     </>
   );

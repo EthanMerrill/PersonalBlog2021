@@ -1,6 +1,7 @@
 
 import * as d3 from 'd3';
 import { gray, select } from 'd3';
+import {withRouter, NextRouter, Router} from 'next/router'
 
 
 class D3Component {
@@ -9,7 +10,7 @@ class D3Component {
     props;
     svg;
 
-    constructor(containerEl, props) {
+    constructor(containerEl, props, router) {
         this.containerEl = containerEl;
         this.props = props;
         const { width, height } = props;
@@ -18,8 +19,9 @@ class D3Component {
             .style('background-color', 'white')
             .attr('width', width)
             .attr('height', height);
-        // this.updateDatapoints();
-        this.buildNetwork(props.data, containerEl, this.svg, width, height);
+        this.router = router;
+        
+        this.buildNetwork(props.data, containerEl, this.svg, width, height, router);
     }
 
     // updateDatapoints = () => {
@@ -43,7 +45,7 @@ class D3Component {
 
 
 
-    buildNetwork = (data, chartRef, svg, width, height) => {
+    buildNetwork = (data, chartRef, svg, width, height, router) => {
         // console.log(data)
         function linkFinder(data) {
             let node_links = []
@@ -132,27 +134,37 @@ class D3Component {
             // .text(function(d) {
             //     return d.id;
             // })
-            .attr("xlink:href", function (d) {
-                if (d.url != null){
-                    return ("xlink:href", d.url)
-                } else if (d.group != null && d.slug != null && d.slug != undefined){
-                    return ("xlink:href", ("/article").concat("/", d.slug))
-                }
+            // .attr("xlink:href", function (d) {
+            //     if (d.url != null){
+            //         return ("xlink:href", d.url)
+            //     } else if (d.group != null && d.slug != null && d.slug != undefined){
+            //         return ("xlink:href", ("/article").concat("/", d.slug))
+            //     }
                 
-            })
+            // })
             .attr('class', "hyperlink")
 
-            .on("mouseover", function (d, i) {
-                return tooltip.style("visibility", "visible").text(i.description)
+            .on("mouseover", function (i,d) {
+                return tooltip.style("visibility", "visible").text(d.description)
             })
-            .on("mousemove", function (d, i) {
+            .on("mousemove", function (i, d) {
                 
-                return tooltip.style("top", (d.clientY - 10) + "px").style("left", (d.clientX + 40) + "px");
+                return tooltip.style("top", (i.clientY - 5) + "px").style("left", (i.clientX + 30) + "px");
             })
             .on("mouseleave", function (d, i) {
                 return tooltip.style("visibility", "hidden")
             }
             )
+            .on('click', function(i,d ){
+                  if (d.url != null){
+                    router.push(d.url)
+                    return
+                } else if (d.group != null && d.slug != null && d.slug != undefined){
+                    router.push(("/article").concat("/", d.slug))
+                    return
+                }
+
+            })
         var tooltip = d3.select(chartRef)
             .append("div")
             .style("position", "absolute")
@@ -163,11 +175,11 @@ class D3Component {
             
 
         const rect = hyperlink.append("rect")
-        .filter(function (d) {
-            // If it doesn't have an icon, give it a circle
-            return (d.icon == null)
-        })
-        .attr('width', rectWidth)
+            .filter(function (d) {
+                // If it doesn't have an icon, give it a circle
+                return (d.icon == null)
+            })
+            .attr('width', rectWidth)
         // .attr('height', function(d){
         //     console.log(wrap(d.id,50))
 

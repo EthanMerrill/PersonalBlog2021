@@ -7,12 +7,11 @@ import React, { useState, useEffect, useRef } from 'react'
 
 const Layout = ({ children, categories, seo }) => (
 
-  <>
+  <div>
     {/* <Nav categories={categories} /> */}
-    <ForceDirectedNav />
-    <div className="top-offset-block"></div>
+    {/* <div className="top-offset-block"></div> */}
     {children}
-  </>
+  </div>
 );
 
 export default Layout;
