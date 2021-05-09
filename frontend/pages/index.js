@@ -1,7 +1,7 @@
 import React from "react";
 import Head from 'next/head'
 import Articles from "../components/articles";
-import Layout from "../components/layout";
+// import Layout from "../components/layout";
 import Seo from "../components/seo";
 
 import { fetchAPI } from "../lib/api";
@@ -30,7 +30,7 @@ const Home = ({ articles, categories, homepage }) => {
 
         <script src="https://kit.fontawesome.com/374cfc1460.js" crossorigin="anonymous"></script>
       </Head>
-      <Layout categories={categories} > 
+      {/* <Layout categories={categories} >  */}
       <Seo seo={homepage.seo} />
 
       <div className="uk-section">
@@ -39,7 +39,7 @@ const Home = ({ articles, categories, homepage }) => {
           <Articles articles={articles} />
         </div>
       </div>
-      </Layout>
+      {/* </Layout> */}
 
     </div >
   );

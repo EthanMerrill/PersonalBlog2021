@@ -75,7 +75,7 @@ img:hover {
 /* D3 Nav Section */
 
 .d3-div{
-  height:800px;
+  height:80vh;
   transition: height 2s;
   /* width:100%; */
   background-color: #f4f4f4;
@@ -118,7 +118,7 @@ img:hover {
 }
 
 .react-world{
-  height:900px;
+  /* height:900px; */
   position:fixed;
   /* filter:blur(5px); */
   width:100%;

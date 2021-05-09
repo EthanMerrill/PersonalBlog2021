@@ -4,9 +4,7 @@ const Image = ({ image, style }) => {
 
   try {
     const imageUrl = getStrapiMedia(image);
-    console.log(imageUrl)
     if (imageUrl == false) {
-      console.log("image not found")
       return (<div className="image-not-found"></div>)
     } else {
       return (

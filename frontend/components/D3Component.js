@@ -7,13 +7,16 @@ import {withRouter, NextRouter, Router} from 'next/router'
 class D3Component {
 
     containerEl;
-    props;
+    articles;
+    width;
+    height;
     svg;
 
-    constructor(containerEl, props, router) {
+    constructor(containerEl, articles, width, height, router) {
         this.containerEl = containerEl;
-        this.props = props;
-        const { width, height } = props;
+        this.articles = articles;
+        this.height = height;
+        this.width = width;
         this.svg = d3.select(containerEl)
             .append('svg')
             .style('background-color', 'white')
@@ -21,7 +24,8 @@ class D3Component {
             .attr('height', height);
         this.router = router;
         
-        this.buildNetwork(props.data, containerEl, this.svg, width, height, router);
+        this.buildNetwork(articles, containerEl, this.svg, width, height, router);
+        // this.resize(width, height, this.svg)
     }
 
     // updateDatapoints = () => {
@@ -46,12 +50,26 @@ class D3Component {
 
 
     buildNetwork = (data, chartRef, svg, width, height, router) => {
-        // console.log(data)
-        function linkFinder(data) {
-            let node_links = []
+        function formatData(data){
+            var tempData = (data).map(d => {
+                let tempArr = d.articles.map(f => { return { "source": d.title, "target": f.title } })
+                    return ({ "id": d.title, "url": d.ExtLink, "group": d.category.name, "icon": d.icon, "description": d.description, "links": tempArr , "slug":d.slug, "status":d.status})
+            })
             
+            var publishedArticles = tempData.filter(node => node.status == "published")
+            var formattedArticleData = ({ "nodes": [...publishedArticles] })
+            return formattedArticleData
+        }
 
-            data.nodes.forEach(nodes => {
+        const formattedArticleData = formatData(data)
+
+        function linkFinder(formattedArticleData) {
+            let node_links = []
+
+
+
+
+            formattedArticleData.nodes.forEach(nodes => {
                 // console.log(typeof (nodes), nodes, nodes.links.target)
                 if ((nodes.links) != []) {
                     // node_links.push(nodes.links)
@@ -83,13 +101,13 @@ class D3Component {
 
 
 
-        const nodes = data.nodes
-        const links = linkFinder(data)
+        const nodes = formattedArticleData.nodes
+        const links = linkFinder(formattedArticleData)
 
         const iconSize = 48
         const rectWidth = 150
 
-        const labelsNodes = data.nodes.map(d => Object.create(d));
+        const labelsNodes = formattedArticleData.nodes.map(d => Object.create(d));
 
 
 
@@ -286,7 +304,7 @@ class D3Component {
         });
 
         width, height = resize();
-        d3.select("#d3-div").on("resize", console.log('resized@!!'));
+        d3.select("#d3-div").on("resize", resize());
         function resize() {
                 //get the element containing the d3 and use client height and width attributes to get the size of this element and set the size of the svg as the same size
             let parentElement = document.getElementById('d3-div')

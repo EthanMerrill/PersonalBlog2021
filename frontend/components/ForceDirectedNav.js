@@ -7,28 +7,28 @@ import Link from "next/link";
 import {useRouter} from 'next/router'
 let vis;
 // https://medium.com/@stopyransky/react-hooks-and-d3-39be1d900fb
-export default function ForceDirectedNav(props) {
+export default function ForceDirectedNav({articles}) {
 
-    const APCI = new ApolloClientInterface(`https://ethanmerrillwebsite.ue.r.appspot.com/graphql`)
+    // const APCI = new ApolloClientInterface(`https://ethanmerrillwebsite.ue.r.appspot.com/graphql`)
     // console.log(APCI)
-    let graphData = APCI.query(`
-            query{
-                articles{
-                  title
-                  id
-                  icon
-                  ExtLink
-                  description
-                  slug
-                  status
-                  category{
-                    name
-                  }
-                  articles {
-                    title
-                  }
-                }
-              }`).then(result => { return result })
+    // let graphData = APCI.query(`
+    //         query{
+    //             articles{
+    //               title
+    //               id
+    //               icon
+    //               ExtLink
+    //               description
+    //               slug
+    //               status
+    //               category{
+    //                 name
+    //               }
+    //               articles {
+    //                 title
+    //               }
+    //             }
+    //           }`).then(result => { return result })
 
         // Scroll detection code: https://dev.to/chriseickemeyergh/building-custom-scroll-animations-using-react-hooks-4h6f
     const ourRef = useRef(null);
@@ -73,69 +73,71 @@ export default function ForceDirectedNav(props) {
 
 
     const router = useRouter()
-    const [data, setData] = useState(null);
     const [width, setWidth] = useState(null);
     const [height, setHeight] = useState(null);
     const [active, setActive] = useState(null);
     const refElement = useRef(null);
-    useEffect(fetchData, []);
+    // useEffect(reformatData, []);
     // useEffect(handleResizeEvent, []);
-    var vis = useEffect(initVis, [data]);
-    // useEffect(updateVisOnResize, [width, height]);
+    var vis = useEffect(initVis, []);
+    useEffect(updateVisOnResize, [width, height]);
 
-    function fetchData() {
-        Promise.resolve(graphData).then((data1) => {
-            let tempData = Object.values(data1.data.articles).map(d => {
-                let tempArr = d.articles.map(f => { return { "source": d.title, "target": f.title } })
-                    return ({ "id": d.title, "url": d.ExtLink, "group": d.category.name, "icon": d.icon, "description": d.description, "links": tempArr , "slug":d.slug, "status":d.status})
-            })
-            // console.log(...tempData)
-            var publishedArticles = tempData.filter(node => node.status == "published")
-            setData({ "nodes": [...publishedArticles] })
-        })
-            
-    }
+    const size = useWindowSize();
 
-    function handleResizeEvent() {
-        let resizeTimer;
-        // console.log("handle resize event called")
-        const handleResize = () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function () {
-                setWidth(window.innerWidth);
-                setHeight(window.innerHeight);
-                // console.log(width, height)
-            }, 300);
-        };
-        window.addEventListener('resize', handleResize);
+// Hook : https://stackoverflow.com/questions/63406435/how-to-detect-window-size-in-next-js-ssr-using-react-hook
+function useWindowSize() {
+    // Initialize state with undefined width/height so server and client renders match
+    // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
+    const [windowSize, setWindowSize] = useState({
+      width: undefined,
+      height: undefined,
+    });
+  
+    useEffect(() => {
+      // only execute all the code below in client side
+      if (typeof window !== 'undefined') {
+        // Handler to call on window resize
+        function handleResize() {
+          // Set window width/height to state
+          setWindowSize({
+            width: window.innerWidth,
+            height: window.innerHeight,
+          })
+          setWidth(window.innerWidth);
+          setHeight(window.innerHeight);;
+        }
+      
+        // Add event listener
+        window.addEventListener("resize", handleResize);
+       
+        // Call handler right away so state gets updated with initial window size
+        handleResize();
+      
+        // Remove event listener on cleanup
+        return () => window.removeEventListener("resize", handleResize);
+      }
+    }, []); // Empty array ensures that effect is only run on mount
+    // console.log(windowSize)
+    return windowSize;
+  }
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-    }
 
     function initVis() {
+        console.log('initVis', width,height)
         // handleResizeEvent()
-        // console.log(width)
-        if (data) {
-            const d3Props = {
-                data,
-                width,
-                height,
-        };
-            // console.log(d3Props.width, d3Props.height)
-            vis = new D3Component(refElement.current, d3Props, router);
+
+            console.log(width, height)
+            vis = new D3Component(refElement.current, articles, height, width, router);
 
         }
+    function updateVisOnResize() {
+        if (vis) {
+            console.log(vis)
+            // vis.resize(height, width, refElement.current)
+            // vis && vis.buildNetwork.resize();
+        }
+
     }
-
-    // function updateVisOnResize() {
-    //     if (vis) {
-    //         console.log(vis)
-    //         vis && vis.buildNetwork.resize();
-    //     }
-
-    // }
 
     return (
         <div className = "background-nav">

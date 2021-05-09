@@ -4,15 +4,14 @@ import "../assets/css/style.css";
 import { createContext } from "react";
 import { getStrapiMedia } from "../lib/media";
 import { fetchAPI } from "../lib/api";
-import Layout from "../components/layout"
+// import Layout from "../components/layout"
 import ForceDirectedNav from "../components/ForceDirectedNav"
 
 // Store Strapi Global object in context
 export const GlobalContext = createContext({});
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps, articles }) => {
   const { global } = pageProps;
-
   return (
     <>
       <Head>
@@ -33,11 +32,11 @@ const MyApp = ({ Component, pageProps }) => {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.2.0/js/uikit.js" />
       </Head>
       <GlobalContext.Provider value={global}>
-        <Layout {...pageProps}>
+        {/* <Layout {...pageProps}> */}
 
-        <ForceDirectedNav/>
+        <ForceDirectedNav articles = {articles}/>
         <Component {...pageProps} />
-        </Layout>
+        {/* </Layout> */}
       </GlobalContext.Provider>
     </>
   );
@@ -51,9 +50,10 @@ MyApp.getInitialProps = async (ctx) => {
   // Calls page's `getInitialProps` and fills `appProps.pageProps`
   const appProps = await App.getInitialProps(ctx);
   // Fetch global site settings from Strapi
-  const global = await fetchAPI("/global");
+  const global = await fetchAPI("/global")
+  const articles =await  Promise.resolve(fetchAPI("/articles?status=published")).then(articles=>{return articles})
   // Pass the data to our page via props
-  return { ...appProps, pageProps: { global } };
+  return { ...appProps, pageProps: { global }, articles };
 };
 
 export default MyApp;

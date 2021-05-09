@@ -1,7 +1,6 @@
 import ReactMarkdown from "react-markdown";
 import Moment from "react-moment";
 import { fetchAPI } from "../../lib/api";
-import Layout from "../../components/layout";
 import Image from "../../components/image";
 import Seo from "../../components/seo";
 import { getStrapiMedia } from "../../lib/media";
@@ -32,7 +31,7 @@ const Article = ({ article, categories }) => {
     window.scrollTo(0,350)
   })
   return (
-    <Layout categories={categories}>
+    <div>
       <Seo seo={seo} />
       <div className="article-wrapper">   
 
@@ -76,7 +75,7 @@ const Article = ({ article, categories }) => {
           </div>
         </div> 
       </div>  
-    </Layout>
+      </div>
   );
 };
 

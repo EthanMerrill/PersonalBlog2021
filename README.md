@@ -21,7 +21,7 @@ TODO:
 - [ ] make tooltips the card component
 - [ ] Make the force directed nav change when screen size changes. Use case: phone rotates, window resized. 
 - [ ] change opacity and size of nodes based on publish date distance from today
-- [ ] add a intro usability guide
+- [ ] add a intro usability guide (Or make it so intuitive do don't need one!!)
 - [ ] if photo, put title above
 - [ ] make a mobile navigation option (the site doesn't really work on mobile at the moment)
 - [ ] Modify nav query so that it is only needed at next build time, not at every site visit. Something to do with site re-hydration, static optimization, and getInitialProps in pages/_app
