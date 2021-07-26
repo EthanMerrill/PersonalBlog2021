@@ -9,8 +9,19 @@ import React, {  useEffect } from 'react'
 
 const Article = ({ article, categories }) => {
 
-  const imageUrl = getStrapiMedia(article.image);
 
+  // get the time to break the image cache
+  var d = new Date();
+  var currentTime= d.getTime();
+
+  var bannerClass = `uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin ${currentTime}`
+
+  //by default the url is banner image not found which will return a 404
+  var imageUrl = 'banner_image_not_found'
+  // if the article image is not null, it will set get the url from the getstrapimedia function
+  if (article.image != null) {
+    imageUrl = getStrapiMedia(article.image);
+  }
 
 
   const seo = {
@@ -24,7 +35,7 @@ const Article = ({ article, categories }) => {
     console.log("Author  found")
 
   } else {
-    console.log("author not found")
+    console.log("Author Not found")
   }
   //OPEN ARTICLES AT SCROLL POSITION
   useEffect(()=> {
@@ -36,15 +47,21 @@ const Article = ({ article, categories }) => {
       <div className="article-wrapper">   
 
         <div className="centering-container">
-          <div
+          {/* <div
             id="banner"
-            className="uk-height-medium uk-flex uk-flex-center uk-flex-middle uk-background-cover uk-light uk-padding uk-margin"
+            className={bannerClass}
             data-src={imageUrl}
             data-srcset={imageUrl}
             data-uk-img = {imageUrl}
-          >
-            <h1>{article.title}</h1>
-          </div>
+            time = {currentTime}
+          > */}
+          
+          
+            
+          {/* </div> */}
+          <Image image = {article.image} className = {bannerClass}>
+            <h1>{article.title}</h1>  
+          </Image>
           <div className="uk-section">
             <div className="uk-container uk-container-small">
               <ReactMarkdown source={article.content} escapeHtml={false} />

@@ -289,17 +289,21 @@ class D3Component {
 
         simulation.on("tick", () => {
             link
-                .attr("x1", d => Math.max(80, Math.min(width - 80, d.source.x)))
-                .attr("y1", d => Math.max(rectWidth/3, Math.min(height, d.source.y)))
-                .attr("x2", d => Math.max(80, Math.min(width - 80, d.target.x)))
-                .attr("y2", d => Math.max(rectWidth/3, Math.min(height, d.target.y)));
+                // .attr("x1", d => Math.max(rectWidth/2, Math.min(width - 80, d.source.x)))
+                // .attr("y1", d => Math.max(rectWidth/4, Math.min(height, d.source.y)))
+                // .attr("x2", d => Math.max(rectWidth/2, Math.min(width - 80, d.target.x)))
+                // .attr("y2", d => Math.max(rectWidth/4, Math.min(height, d.target.height)));
 
-                // .attr("x1", d => d.source.x)
-                // .attr("y1", d => d.source.y)
-                // .attr("x2", d => d.target.x)
-                // .attr("y2", d => d.target.y)
+                // .attr("transform", d => `translate(${Math.max(rectWidth/2, Math.min(width - rectWidth/2, d.x))}, 
+                // ${Math.max(rectWidth/4, Math.min(height - rectWidth/4, d.y))})`);
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y)
+
             node
-                .attr("transform", d => `translate(${Math.max(rectWidth/3, Math.min(width - rectWidth/3, d.x))}, ${Math.max(rectWidth/3, Math.min(height - rectWidth/3-15, d.y))})`);
+                .attr("transform", d => `translate(${Math.max(rectWidth/2, Math.min(width - rectWidth/2, d.x))}, 
+                ${Math.max(rectWidth/4, Math.min(height - rectWidth/4, d.y))})`);
 
         });
 
@@ -310,10 +314,11 @@ class D3Component {
             let parentElement = document.getElementById('d3-div')
             width = parentElement.clientWidth, height = parentElement.clientHeight;
             svg.attr("width", width).attr("height", height);
-            // console.log(width, height)
+            console.log(width, height)
             simulation.force("center", d3.forceCenter(width / 2, height / 2)).restart();
             return svg.attr("width"), svg.attr('height')
         }
+
 
            // Function to wrap text written by Mike Bostock 
     function wrap(text, width) {
